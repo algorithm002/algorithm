@@ -1,3 +1,8 @@
+
+# 看了别人的代码仿照写的
+# 时间复杂度  O(logN)
+# 利用位运算做除2和奇偶判断
+# 空间复杂度  O(1)
 class Solution:
     def myPow(self, x: float, n: int) -> float:
         isNegitive=False

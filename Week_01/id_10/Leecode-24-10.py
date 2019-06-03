@@ -4,6 +4,8 @@
 #         self.val = x
 #         self.next = None
 
+# 时间复杂度  O(n)
+# 空间复杂度  O(1)
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
         if not head or not head.next:
