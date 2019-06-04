@@ -21,8 +21,4 @@ def rotate(nums, k):
         nums[ti] = nums[tail+i]
         nums[tail+i] = _t
 
-    tail = length - 1
-    for i in range(int(length/2)):
-        _t = nums[i]
-        nums[i] = nums[tail-i]
-        nums[tail-i] = _t
+    nums.reverse()
