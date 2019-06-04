@@ -7,6 +7,12 @@
  */
 class LeetCode_26_038 {
 
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：不需要额外空间
+     * @param nums
+     * @return
+     */
     public int removeDuplicates(int[] nums) {
         // check valid
         if (nums.length == 0) return 0;
