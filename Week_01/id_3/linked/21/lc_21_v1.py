@@ -15,6 +15,9 @@ def merge(l1, l2):
             tmp.next = _t
         tmp = _t
 
-    tmp.next = l1 or l2
+    if tmp:
+        tmp.next = l1 or l2
+    else:
+        root = l1 or l2
 
     return root
