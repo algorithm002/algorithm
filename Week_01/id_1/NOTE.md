@@ -16,3 +16,4 @@
 
 6.LeetCode 242： Four solutions came to mind. Simple but fun.
    
+7.LeetCode 49: First thought use Map to solve this problem. Three answers came up.
