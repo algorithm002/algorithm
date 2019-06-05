@@ -302,3 +302,39 @@ class Solution {
 ```
 提交结果后，耗时只打败了50%的人，可以继续优化。
 ### 解法二
+#### 思路
+在国际站看到了一个使用双游标的解法，发现自己是被作业的分类限制了思考，其实题目的解法和26题比较相似。
+#### 解题过程
+1. 使用两个指针
+2. nonDuplicatesIndex游标用来指向保存没有被对对碰掉的元素所保存的位置
+3. i指针用来遍历整个数组
+4. nonDuplicatesIndex指针是从-1开始的，思路和我26题从1开始比较类似，区别在于最后new String的时候需不需要+1
+5. 然后遍历的时候就判断是否为-1，或者是否不相同
+6. 如果满足就++nonDuplicatesIndex，并将i遍历到的元素，写到nonDuplicatesIndex所指向的位置
+7. 否则就让nonDuplicatesIndex回退，这样就相当于两个一样的元素对对碰掉了
+```java
+class Solution {
+    public String removeDuplicates(String S) {
+        if (S == null || "".equals(S)) {
+            return S;
+        }
+        
+        char[] cs = S.toCharArray();
+        int nonDuplicatesIndex = -1;
+        for (int i = 0; i < cs.length; i++) {
+            if (nonDuplicatesIndex == -1 || cs[nonDuplicatesIndex] != cs[i]) {
+                cs[++nonDuplicatesIndex] = cs[i];
+            } else {
+                nonDuplicatesIndex--;
+            }
+        }
+        
+        return new String(cs, 0, nonDuplicatesIndex + 1);
+    }
+}
+```
+### 收获
+这道题的收获：
+1. 面对题目时候，通过形成的认知框架迅速解题固然很好，但是也不能让自己被框架限制住思维，否则就像这道题一样只能想到栈的方式(可能只是因为自己做的太少，框架太差了。。。)。
+2. 加深了双指针的使用方法。
+3. 熟悉了栈的相关类型的解题思路。
