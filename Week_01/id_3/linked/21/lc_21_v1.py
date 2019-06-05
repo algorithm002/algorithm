@@ -1,8 +1,8 @@
 def merge(l1, l2):
     root = None
     tmp = None
-    while l1 or l2:
-        if not l1 or (l2 and l1.val > l2.val):
+    while l1 and l2:
+        if l1.val > l2.val:
             _t = l2
             l2 = l2.next
         else:
@@ -14,5 +14,7 @@ def merge(l1, l2):
         else:
             tmp.next = _t
         tmp = _t
+
+    tmp.next = l1 or l2
 
     return root
