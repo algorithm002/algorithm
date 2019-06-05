@@ -16,13 +16,17 @@ class LeetCode_242_038 {
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) return false;
 
-        int num = 0;
-        for(int i = 0; i< s.length(); ++i) {
-            num += s.charAt(i) - 'a';
-            num -= t.charAt(i) - 'a';
+        int[] hash = new int[26];
+        for(int i = 0; i < s.length(); ++i) {
+            hash[s.charAt(i) - 'a']++;
+            hash[t.charAt(i) - 'a']--;
+        }
+
+        for (int i = 0; i < hash.length; ++i) {
+            if (hash[i] != 0) return false;
         }
         
-        return num == 0 ? true : false;
+        return true;
     }
 
     public static void main(String[] args) {
