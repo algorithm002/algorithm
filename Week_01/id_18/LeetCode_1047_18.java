@@ -28,4 +28,22 @@ public class LeetCode_1047_18 {
 
         return result.toString();
     }
+
+    public String removeDuplicates1(String S) {
+        if (S == null || "".equals(S)) {
+            return S;
+        }
+
+        char[] cs = S.toCharArray();
+        int nonDuplicatesIndex = -1;
+        for (int i = 0; i < cs.length; i++) {
+            if (nonDuplicatesIndex == -1 || cs[nonDuplicatesIndex] != cs[i]) {
+                cs[++nonDuplicatesIndex] = cs[i];
+            } else {
+                nonDuplicatesIndex--;
+            }
+        }
+
+        return new String(cs, 0, nonDuplicatesIndex + 1);
+    }
 }
