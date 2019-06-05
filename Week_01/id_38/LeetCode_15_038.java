@@ -18,25 +18,37 @@ class LeetCode_15_038 {
     public List<List<Integer>> threeSum(int[] nums) {
         if (nums.length < 3) return null;
         Arrays.sort(nums);
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
 
-        for (int i = 0; i < nums.length - 2; ++i) {
-            for (int j = i + 1; j < nums.length - 1; ++j) {
-                for (int k = j + 1; k < nums.length; ++k) {
-                    if (nums[i] + nums[j] + nums[k] == 0) {
-                        List<Integer> hitnums = new ArrayList<Integer>();
-                        hitnums.add(nums[i]);
-                        hitnums.add(nums[j]);
-                        hitnums.add(nums[k]);
-                        result.add(hitnums);
+        List<List<Integer>> result = new ArrayList<>();
+
+        if (nums[0] <= 0 && nums[nums.length - 1] >= 0) {
+            for (int i = 0; i < nums.length - 2; ++i) {
+                if (i > 0 && nums[i-1] == nums[i]) continue;
+
+                int l = i +1, r = nums.length - 1;
+                while(l < r){
+                    if(nums[r] > -nums[i]-nums[l]){
+                        while(l < r && nums[r-1] == nums[r]) r--; //右指针去重
+                        r--;
+                    }
+                    else if(nums[r] < -nums[i]-nums[l]){
+                        while(l < r && nums[l+1] == nums[l]) l++; //左指针去重
+                        l++;
+                    }
+                    else{
+                        result.add(Arrays.asList(nums[i],nums[l],nums[r]));
+                        while(l < r && nums[r-1] == nums[r]) r--; //左指针去重
+                        while(l < r && nums[l+1] == nums[l]) l++; //右指针去重
+                        r--;
+                        l++;
                     }
                 }
             }
-        }
+        } 
 
         return result;
     }
-    
+
     public static void main(String[] args) {
         LeetCode_15_038 testCode_15_038 = new LeetCode_15_038();
         int[] nums = new int[]{-1,0,1,2,-1,-4};
