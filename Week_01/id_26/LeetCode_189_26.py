@@ -15,10 +15,11 @@ class Solution(object):
                 start += 1
                 end -= 1
 
-        reverse(0, len(nums)-1)
-        reverse(0, k-1)
-        reverse(k, len(nums)-1)
+        reverse(0, len(nums) - 1)
+        reverse(0, k - 1)
+        reverse(k, len(nums) - 1)
         return nums
+
 
 print(Solution().rotate([1, 2, 3, 4, 5, 6, 7], 3))
 print(Solution().rotate([], 4))

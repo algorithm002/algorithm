@@ -6,7 +6,7 @@ class Solution(object):
         """
         left, right = 0, n
         while left <= right:
-            mid = (right + left)/2
+            mid = (right + left) / 2
             k = mid * (mid + 1)
             if k <= 2 * n:
                 left = mid + 1

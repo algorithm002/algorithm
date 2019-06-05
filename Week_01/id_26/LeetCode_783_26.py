@@ -23,6 +23,6 @@ class Solution(object):
             self.ret = min(abs(node.val - self.preVal), self.ret)
             self.preVal = node.val
             dfs(node.right)
-            
+
         dfs(root)
         return self.ret

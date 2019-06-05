@@ -23,6 +23,7 @@ class Solution(object):
             if root.val <= R and root.val >= L:
                 self.ret += root.val
             bst(root.right, L, R)
+
         bst(root, L, R)
         return self.ret
 
@@ -33,6 +34,7 @@ class Solution(object):
         :type R: int
         :rtype: int
         """
+
         def dfs(node):
             if not node:
                 return

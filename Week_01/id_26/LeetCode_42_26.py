@@ -4,7 +4,7 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        i, j = 0, len(height)-1
+        i, j = 0, len(height) - 1
         ret, left_max, right_max = 0, 0, 0
         while i <= j:
             left_max = max(left_max, height[i])
@@ -23,7 +23,7 @@ class Solution(object):
 
         max_height = height.index(max(height))
         ret = 0
-        
+
         max_baffle = 0
         for i in range(1, max_height):
             max_baffle = max(height[i - 1], max_baffle)

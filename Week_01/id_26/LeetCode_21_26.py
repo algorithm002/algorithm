@@ -1,8 +1,9 @@
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 
 class Solution(object):
     def mergeTwoLists(self, l1, l2):
@@ -28,4 +29,3 @@ class Solution(object):
                 l2 = l2.next
             s = s.next
         return k.next
-        

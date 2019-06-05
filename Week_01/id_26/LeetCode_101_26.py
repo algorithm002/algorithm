@@ -12,6 +12,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
+
         def _isSymmetric(node1, node2):
             if not node1 and not node2:
                 return True
@@ -19,7 +20,7 @@ class Solution(object):
                 return False
             if not node1.val == node2.val:
                 return False
-            return _isSymmetric(node1.left, node2.right) and _isSymmetric(node1.right, node2.left)
+            return _isSymmetric(node1.left, node2.right) and _isSymmetric(
+                node1.right, node2.left)
 
         return _isSymmetric(root, root)
-        

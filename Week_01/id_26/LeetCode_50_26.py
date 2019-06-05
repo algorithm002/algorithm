@@ -13,7 +13,7 @@ class Solution(object):
         if n < 0:
             return 1.0 / self.myPow(x, -n)
 
-        t = self.myPow(x, n/2)
+        t = self.myPow(x, n / 2)
         if n & 1 == 0:
             return t * t
         else:
