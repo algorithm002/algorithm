@@ -1,6 +1,8 @@
 import lc_21_v1
+import lc_21_v2
 
-f = lc_21_v1.merge
+# f = lc_21_v1.merge
+f = lc_21_v2.merge
 
 
 class ListNode:
