@@ -11,10 +11,13 @@ def three_sum(nums):
     for n in nums:
         count = 1 + cache.get(n, 0)
         cache[n] = count
-        if count <= 3:
+        if n == 0 and count <= 3:
+            new_nums.append(n)
+        elif count <= 2:
             new_nums.append(n)
 
     nums = new_nums
+    nums.sort()
 
     length = len(nums)
     for i in range(length):
@@ -24,6 +27,11 @@ def three_sum(nums):
             if n1 == 0 and n2 == 0 and cache[0] < 3:
                 continue
             s = n1 + n2
+
+            # 已排序的数组，剪掉重复的计算。
+            if s > 0:
+                break
+
             if (-s == n1 or -s == n2) and cache.get(-s, 0) == 1:
                 continue
 

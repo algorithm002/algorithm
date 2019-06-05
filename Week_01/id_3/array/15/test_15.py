@@ -1,6 +1,8 @@
 import lc_15_v1
+import lc_15_v2
 
-f = lc_15_v1.three_sum
+# f = lc_15_v1.three_sum
+f = lc_15_v2.three_sum
 
 
 def check(nums, r):
