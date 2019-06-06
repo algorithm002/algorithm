@@ -338,3 +338,87 @@ class Solution {
 1. 面对题目时候，通过形成的认知框架迅速解题固然很好，但是也不能让自己被框架限制住思维，否则就像这道题一样只能想到栈的方式(可能只是因为自己做的太少，框架太差了。。。)。
 2. 加深了双指针的使用方法。
 3. 熟悉了栈的相关类型的解题思路。
+## LeetCode_441_18
+### 题目
+你总共有 n 枚硬币，你需要将它们摆成一个阶梯形状，第 k 行就必须正好有 k 枚硬币。
+
+给定一个数字 n，找出可形成完整阶梯行的总行数。
+
+n 是一个非负整数，并且在32位有符号整型的范围内。
+
+示例 1:
+```
+n = 5
+硬币可排列成以下几行:
+¤
+¤ ¤
+¤ ¤
+因为第三行不完整，所以返回2.
+```
+示例 2:
+```
+n = 8
+硬币可排列成以下几行:
+¤
+¤ ¤
+¤ ¤ ¤
+¤ ¤
+因为第四行不完整，所以返回3.
+```
+### 思路
+看到这题，看着一层层的往后推的图的样子，脑子里就直接想到了下面四段话：
+1. terminator
+2. process
+3. digging into
+4. restore
+
+然后就开始写：
+```java
+class Solution {
+    public int arrangeCoins(int n) {
+        return doJob(0, 0, n);
+    }
+    
+    private int doJob(int level, int sum, int n) {
+        return sum + ++level > n ? --level : doJob(level, sum+level, n);
+    }
+}
+```
+满心等着ac，结果int类型溢出，导致虚拟机栈溢出。懵了。揉了揉脸，再看了下题目，差点抽自己耳光，最简单的数学题啊。。。**真的是手里拿着锤子，看什么都是钉子**。。。
+
+于是又满怀信心的敲出了如下的代码：
+```java
+class Solution {
+    public int arrangeCoins(int n) {
+        int i = 0;
+        for (int sum = 0; sum <= n;) {
+            sum = (1 + ++i) * i / 2;
+        }
+        return --i;
+    }
+}
+````
+结果超时。。。
+### 解法一
+#### 思路
+1. 其实明显不用从1开始算，直接使用求根公式就可以算出那个值
+2. (m + 0.5)^2 = 2 * n - 0.25 =》 m = sqrt(2 * n - 0.25) - 0.5
+3. 然后再求小于这个整数中最大的那个就可以了
+#### 解题过程
+```java
+class Solution {
+    public int arrangeCoins(int n) {
+        return (int)(Math.sqrt(n * 2 + 0.25) - 0.5);
+    }
+}
+```
+坑爹，结果又没注意整数类型溢出，又报错，那就只能先转成double了：
+```java
+class Solution {
+    public int arrangeCoins(int n) {
+        return (int)(Math.sqrt(n * 2.0 + 0.25) - 0.5);
+    }
+}
+```
+这样问题就解决了。但压根没用到作业分类的二分法啊，所以要继续找答案。
+### 解法二
