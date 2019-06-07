@@ -447,3 +447,63 @@ class Solution {
 ### 收获
 1. 体会到数学是算法的基础，有时候直接拿数学简化公式以后，算起来会更快
 2. 感觉先好好想一下怎么解题的思路，等想清楚了再做题，做题的感觉反而更爽，不过思考的过程确实很累，结合之前不断试错修改的过程，两种方式都有锻炼自己的地方。
+## LeetCode_104_18
+### 题目
+给定一个二叉树，找出其最大深度。
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例：
+```
+给定二叉树 [3,9,20,null,null,15,7]，
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回它的最大深度 3 。
+```
+### 解法一
+#### 思路
+使用递归的思路
+1. terminator：root为null的时候，返回当前层数；
+2. process：层数加1；
+3. digging in：下钻到当前节点的左右子树；
+4. restore：比较左右子树返回的层数，向上返回最大值。
+#### 解题过程
+因为思路中涉及到了层数的概念，所以就需要新建一个函数，入参增加一个层数用来下钻的时候传递。
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        return doSearch(0, root);
+    }
+    
+    private int doSearch(int level, TreeNode root) {
+        //terminator
+        if (root == null) {
+            return level;
+        }
+        //process
+        level++;
+        //digging in & restore
+        return Math.max(doSearch(level, root.left), doSearch(level, root.right));
+    }
+}
+```
+通过样板很快就写出了可以执行的代码，然后又再精简了一下
+```java
+public class LeetCode_104_18 {
+    public int maxDepth(TreeNode root) {
+        return doSearch(0, root);
+    }
+
+    private int doSearch(int level, TreeNode root) {
+        return root == null? level: Math.max(doSearch(++level, root.left), doSearch(level, root.right));
+    }
+}
+```
+### 收获
+进一步的熟练了递归的思考和代码的编写，写的速度比以前明显感觉快了。
