@@ -1,8 +1,8 @@
 import lc_24_v1
 import lc_24_v2
 
-# f = lc_24_v1.swap
-f = lc_24_v2.swap
+f = lc_24_v1.swap
+# f = lc_24_v2.swap
 
 
 class ListNode:
@@ -30,13 +30,12 @@ def export(root):
     while root.next:
         root = root.next
         r.append(root.val)
-    print(r)
     return r
 
 
 def check(l, r):
     _r = export(f(build(l)))
-    print(_r, _r == r)
+    print(_r, r, _r == r)
 
 
 check([1, 2, 3, 4], [2, 1, 4, 3])

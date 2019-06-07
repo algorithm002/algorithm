@@ -1,10 +1,7 @@
 def swap(head):
-    if not head:
-        return None
-    nxt = head.next
-    if not nxt:
+    if not head or not head.next:
         return head
-    tmp = nxt.next
+    nxt = head.next
+    head.next = swap(nxt.next)
     nxt.next = head
-    head.next = swap(tmp)
     return nxt
