@@ -7,7 +7,7 @@ f = lc_15_v1.three_sum
 
 def check(nums, r):
     _r = f(nums)
-    print(_r, _r == r)
+    print(_r, r, _r == r)
 
 
 check([-1, 0, 1, 2, -1, -4],

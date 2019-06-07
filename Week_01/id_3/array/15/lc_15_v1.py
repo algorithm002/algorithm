@@ -26,8 +26,11 @@ def three_sum(nums):
 
     length = len(nums)
     for i in range(length):
+        n1 = nums[i]
+        # n1 >= 0 时说明已经遍历把有效的数据都进行遍历，继续遍历已经发生重复
+        if n1 >= 0:
+            break
         for j in range(i+1, length):
-            n1 = nums[i]
             n2 = nums[j]
             if n1 == 0 and n2 == 0 and cache[0] < 3:
                 continue
