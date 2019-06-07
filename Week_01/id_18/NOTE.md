@@ -468,11 +468,11 @@ class Solution {
 ```
 ### 解法一
 #### 思路
-使用递归的思路
+使用分治的思路
 1. terminator：root为null的时候，返回当前层数；
-2. process：层数加1；
-3. drill down：下钻到当前节点的左右子树；
-4. restore：比较左右子树返回的层数，向上返回最大值。
+2. prepare：层数加1；
+3. subproblems下钻到当前节点的左右子树；
+4. process & generate：比较左右子树返回的层数，向上返回最大值。
 #### 解题过程
 因为思路中涉及到了层数的概念，所以就需要新建一个函数，入参增加一个层数用来下钻的时候传递。
 ```java
@@ -486,9 +486,9 @@ class Solution {
         if (root == null) {
             return level;
         }
-        //process
+        //prepare 
         level++;
-        //drill down & restore
+        //subproblems  & prepare & generate result
         return Math.max(doSearch(level, root.left), doSearch(level, root.right));
     }
 }
@@ -506,4 +506,4 @@ public class LeetCode_104_18 {
 }
 ```
 ### 收获
-进一步的熟练了递归的思考和代码的编写，写的速度比以前明显感觉快了。
+具体题目和样板之间有时候并不能完全匹配，但是在做题的过程中能够体会到大致的思路是可以通过样板来指导的。通过做题进一步的熟练了分治的思考和代码的编写，写的速度比以前明显感觉快了。
