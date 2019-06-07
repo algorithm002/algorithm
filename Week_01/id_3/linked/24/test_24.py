@@ -1,8 +1,8 @@
 import lc_24_v1
 import lc_24_v2
 
-f = lc_24_v1.swap
-# f = lc_24_v2.swap
+# f = lc_24_v1.swap
+f = lc_24_v2.swap
 
 
 class ListNode:

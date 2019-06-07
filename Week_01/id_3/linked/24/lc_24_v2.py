@@ -1,14 +1,18 @@
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
 def swap(head):
     if not head or not head.next:
         return head
 
-    result = head.next
-
+    root = prev = ListNode(0)
     while head and head.next:
         nxt = head.next
-        tmp = nxt.next
-        nxt.next = head
-        head.next = (tmp and tmp.next) or tmp
-        head = tmp
+        prev.next = nxt
+        nxt.next, prev, head = head, head, nxt.next
 
-    return result
+    prev.next = head
+    return root.next
