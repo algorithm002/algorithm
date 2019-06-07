@@ -369,7 +369,7 @@ n = 8
 看到这题，看着一层层的往后推的图的样子，脑子里就直接想到了下面四段话：
 1. terminator
 2. process
-3. digging into
+3. drill down
 4. restore
 
 然后就开始写：
@@ -471,7 +471,7 @@ class Solution {
 使用递归的思路
 1. terminator：root为null的时候，返回当前层数；
 2. process：层数加1；
-3. digging in：下钻到当前节点的左右子树；
+3. drill down：下钻到当前节点的左右子树；
 4. restore：比较左右子树返回的层数，向上返回最大值。
 #### 解题过程
 因为思路中涉及到了层数的概念，所以就需要新建一个函数，入参增加一个层数用来下钻的时候传递。
@@ -488,7 +488,7 @@ class Solution {
         }
         //process
         level++;
-        //digging in & restore
+        //drill down & restore
         return Math.max(doSearch(level, root.left), doSearch(level, root.right));
     }
 }
