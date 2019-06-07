@@ -2,6 +2,7 @@
  * @param {number} x
  * @param {number} n
  * @return {number}
+ * https://leetcode.com/problems/powx-n/
  */ 
  
 var myPow = function(x, n) {

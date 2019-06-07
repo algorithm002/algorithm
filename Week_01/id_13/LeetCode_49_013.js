@@ -1,6 +1,7 @@
 /**
  * @param {string[]} strs
  * @return {string[][]}
+ * https://leetcode.com/problems/group-anagrams/
  */
 var groupAnagrams = function(strs) { 
     let res = {};
