@@ -4,15 +4,13 @@
 
 def merge(nums1, m, nums2, n):
     tail = m + n
-    m -= 1
-    n -= 1
     for i in range(tail):
         tail -= 1
         if n < 0:
             break
         if m >= 0 and nums1[m] > nums2[n]:
-            nums1[tail] = nums1[m]
             m -= 1
+            nums1[tail] = nums1[m]
         else:
-            nums1[tail] = nums2[n]
             n -= 1
+            nums1[tail] = nums2[n]
