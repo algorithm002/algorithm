@@ -20,10 +20,8 @@ def rotate(nums, k):
 
     gcd = math.gcd(length, k)
 
-    for t in range(gcd):
-        tmp = nums[t]
+    for offset in range(gcd):
+        tmp = nums[offset]
         for i in range(1, int(length/gcd) + 1):
-            index = (i*k + t) % length
-            _t = nums[index]
-            nums[index] = tmp
-            tmp = _t
+            index = (i*k + offset) % length
+            nums[index], tmp = tmp, nums[index]

@@ -15,15 +15,10 @@ def rotate(nums, k):
 
     tail = length - k - 1
     for i in range(int((length-k)/2)):
-        _t = nums[i]
-        nums[i] = nums[tail-i]
-        nums[tail-i] = _t
+        nums[i], nums[tail-i] = nums[tail-i], nums[i]
 
     tail = -k
     for i in range(int(k/2)):
-        ti = -i - 1
-        _t = nums[ti]
-        nums[ti] = nums[tail+i]
-        nums[tail+i] = _t
+        nums[-i-1], nums[tail+i] = nums[tail+i], nums[-i-1]
 
     nums.reverse()
