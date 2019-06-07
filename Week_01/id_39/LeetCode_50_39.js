@@ -2,6 +2,7 @@
  * @param {number} x
  * @param {number} n
  * @return {number}
+ * https://leetcode.com/problems/powx-n/
  * 分治法（递归）， 不用递归的一种还没理解
  */
 var myPow = function(x, n) {

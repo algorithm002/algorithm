@@ -1,6 +1,7 @@
 /**
  * @param {string} S
  * @return {string}
+ * https://leetcode.com/problems/remove-outermost-parentheses/
  * 标志位，刨除标志位为0的时候，其余时候都移到结果中
  */
 var removeOuterParentheses = function(S) {
