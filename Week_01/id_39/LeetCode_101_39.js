@@ -13,11 +13,8 @@
 
 // 递归法
 var treeSymmetric = function(t1, t2) {
-    if (t1 == null && t2 == null) {
-        return true;
-    }
     if (t1 == null || t2 == null) {
-        return false;
+        return t1 == t2;
     }
     if (t1.val !== t2.val) {
         return false;
