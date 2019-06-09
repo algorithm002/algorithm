@@ -1,5 +1,7 @@
 package Week_01.id_18;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
@@ -111,5 +113,24 @@ public class LeetCode_242_18 {
         }
 
         return true;
+    }
+
+    public boolean isAnagram6( String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) {
+            return false;
+        }
+        int[] prime = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+                73, 79, 83, 89, 97, 101};
+        BigDecimal productS = BigDecimal.valueOf(1);
+        BigDecimal productT = BigDecimal.valueOf(1);
+        for (int i = 0; i < s.length(); i++)
+        {
+            productS = productS.multiply(BigDecimal.valueOf(prime[s.charAt(i) - 'a']));
+        }
+        for (int i = 0; i < t.length(); i++)
+        {
+            productT = productT.multiply(BigDecimal.valueOf(prime[t.charAt(i) - 'a']));
+        }
+        return productS.compareTo(productT) == 0;
     }
 }
