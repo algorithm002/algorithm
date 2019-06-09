@@ -246,11 +246,36 @@ class Solution {
     }
 }
 ```
+### 解法六
+参考了其他同学的解法，直接使用素数相乘的方法，简直绝了
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) {
+            return false;
+        }
+        int[] prime = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+            73, 79, 83, 89, 97, 101};
+        BigInteger productS = BigInteger.valueOf(1);
+        BigInteger productT = BigInteger.valueOf(1);
+        for (int i = 0; i < s.length(); i++)
+        {
+            productS = productS.multiply(BigInteger.valueOf(prime[s.charAt(i) - 'a']));
+        }
+        for (int i = 0; i < t.length(); i++)
+        {
+            productT = productT.multiply(BigInteger.valueOf(prime[t.charAt(i) - 'a']));
+        }
+        return productS.compareTo(productT) == 0;
+    }
+}
+```
 发现solution的第2个解法与我之前想的第2、3种很像，但它没有使用map来映射，而是直接使用arr[index] - 'a'的方法，巧妙的利用数组下标来映射字母并计数。提交后速度变得只有几ms了，提升的非常明显。这个方法的时间复杂是O(n)。
 ### 收获
 通过5种解法的摸索和学习过程，有两点的收获：
 - 感觉把题目提交并成功，而且每一次都比上一次更优化的时候，这种反馈确实会上瘾，现在感觉每次空下来，都想刷道题爽一下了。
 - 在自己尝试了3种解法之后，开始搜寻和学习网上优质解法的时候，在看的时候，可以结合自己的思维过程，更好的体会到别人解法的思路，学习起来更有效率了，而且也更容易记忆。
+- 从解法六收获到的是，解法真的非常多，只要愿意思考。
 ## LeetCode_1047_18
 ### 题目
 给出由小写字母组成的字符串 S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。
