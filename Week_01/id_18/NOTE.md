@@ -597,3 +597,76 @@ class Solution {
 从这道题中学到的：
 1. 前置条件检验的好，可以避免异常，同时能够提高效率。
 2. 解法二思考了很久，无论是看题解还是自己思考，都debug了很久才了解了大概的意思，自己禁不住要人肉在脑中算一下整个过程，否则没办法很好的理解。这一点不知道该怎么克服，但至少找到了一个问题，也算是收获。
+## LeetCode_15_18
+### 题目
+给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
+
+注意：答案中不可以包含重复的三元组。
+```
+例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
+
+满足要求的三元组集合为：
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+```
+### 思路
+1. 3个数的和为0，意味着1个数和另2个数互为相反数。
+2. 数组中的元素是重复的，而结果不能重复，所以可以先排序数组，从而方便遍历时候进行过滤
+3. 可以使用一个指针遍历数组，另两个指针代表剩余元素的头尾指针，或者是另两个数，从而计算它们的和
+### 解法一
+```java
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return Collections.emptyList();
+        }
+        
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        
+        int pointer = 0, head, tail, target;
+        while (pointer < nums.length - 2) {
+            if (pointer > 0 && nums[pointer] == nums[pointer - 1]) {
+                pointer++;
+                continue;
+            }
+            
+            head = pointer + 1;
+            tail = nums.length - 1;
+            target = -nums[pointer];
+            
+            while (head < tail) {
+                if (nums[head] + nums[tail] == target) {
+                    result.add(Arrays.asList(nums[pointer], nums[head], nums[tail]));
+                    
+                    while (head < tail && nums[head] == nums[head + 1]) {
+                        head++;
+                    }
+                    
+                    while (head < tail && nums[tail - 1] == nums[tail]) {
+                        tail--;
+                    }
+                    
+                    head++;
+                    tail--;
+                } else if (nums[head] + nums[tail] < target) {
+                    head++;
+                } else {
+                    tail--;
+                }
+            }
+            
+            pointer++;
+        }
+        
+        return result;
+    }
+}
+```
+解题过程中：
+1. return Collections.emptyList();是因为return null报错，要求的是空list。
+2. while (pointer < nums.length - 2) 是因为数组最后的2个元素不需要遍历，因为没有剩余的元素可以和它们相加计算，或者说，它们的可能性在之前已经检查过了。
+### 收获
+做这道题目时，脑中有一个大概的思路，但具体的代码是通过review其他同学的过程清晰出来的，review和看sol一样可以帮助自己快速的找到思路，再通过对代码的思考，解题的过程就能清晰了。总之review是一件很棒的事情。
