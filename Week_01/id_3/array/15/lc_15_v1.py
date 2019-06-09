@@ -1,6 +1,6 @@
 def three_sum(nums):
     r = []
-    if not nums:
+    if not nums or len(nums) < 3:
         return r
 
     cache = {}
