@@ -1,59 +1,62 @@
 /*
- * @lc app=leetcode id=121 lang=golang
+ * @lc app=leetcode id=84 lang=golang
  *
- * [121] Best Time to Buy and Sell Stock
+ * [84] Largest Rectangle in Histogram
  *
- * https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+ * https://leetcode.com/problems/largest-rectangle-in-histogram/description/
  *
  * algorithms
- * Easy (47.27%)
- * Likes:    2618
- * Dislikes: 124
- * Total Accepted:    503K
- * Total Submissions: 1.1M
- * Testcase Example:  '[7,1,5,3,6,4]'
+ * Hard (31.15%)
+ * Likes:    1874
+ * Dislikes: 50
+ * Total Accepted:    174.6K
+ * Total Submissions: 560.4K
+ * Testcase Example:  '[2,1,5,6,2,3]'
  *
- * Say you have an array for which the i^th element is the price of a given
- * stock on day i.
- *
- * If you were only permitted to complete at most one transaction (i.e., buy
- * one and sell one share of the stock), design an algorithm to find the
- * maximum profit.
- *
- * Note that you cannot sell a stock before you buy one.
- *
- * Example 1:
+ * Given n non-negative integers representing the histogram's bar height where
+ * the width of each bar is 1, find the area of largest rectangle in the
+ * histogram.
  *
  *
- * Input: [7,1,5,3,6,4]
- * Output: 5
- * Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit
- * = 6-1 = 5.
- * Not 7-1 = 6, as selling price needs to be larger than buying price.
  *
  *
- * Example 2:
+ * Above is a histogram where width of each bar is 1, given height =
+ * [2,1,5,6,2,3].
  *
  *
- * Input: [7,6,4,3,1]
- * Output: 0
- * Explanation: In this case, no transaction is done, i.e. max profit = 0.
+ *
+ *
+ * The largest rectangle is shown in the shaded area, which has area = 10
+ * unit.
+ *
+ *
+ *
+ * Example:
+ *
+ *
+ * Input: [2,1,5,6,2,3]
+ * Output: 10
  *
  *
  */
-func maxProfit(prices []int) int {
-	if len(prices) <= 1 {
-		return 0
+func largestRectangleArea(heights []int) int {
+	var newstack = []int{0}
+	var posstack = []int{0}
+	heights = append(heights, 0)
+	maxarea := 0
+	for i, v := range heights {
+		for l := len(newstack); newstack[l-1] > v; l = len(newstack) {
+			tmpheight := newstack[l-1]
+			left := posstack[l-2]
+			right := i
+			maxarea = max((right-left)*tmpheight, maxarea)
+			posstack = posstack[:l-1]
+			newstack = newstack[:l-1]
+		}
+		newstack = append(newstack, v)
+		posstack = append(posstack, i+1)
 	}
-	var maxhere = prices[1] - prices[0]
-	var result = prices[1] - prices[0]
-
-	for i := 1; i < len(prices)-1; i++ {
-		udhere := prices[i+1] - prices[i]
-		maxhere = max(udhere+maxhere, udhere)
-		result = max(maxhere, result)
-	}
-	return max(result, 0)
+	return maxarea
 }
 func max(x, y int) int {
 	if x > y {
@@ -61,4 +64,5 @@ func max(x, y int) int {
 	}
 	return y
 }
+
 
