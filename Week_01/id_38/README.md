@@ -3,17 +3,17 @@
 ## 第一周题目
 ---
 ### 数组、链表
- -[ ] [26. 删除排序数组中的重复项 <font color=green>【简单】</font>](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+ :white_check_mark: <font color=green>【简单】</font>[26. 删除排序数组中的重复项 ](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
- -[x] [189. 旋转数组<font color=green>【简单】</font>](https://leetcode-cn.com/problems/rotate-array/)
+<font color=green>【简单】</font>[189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)
 
-[21. 合并两个有序链表<font color=green>【简单】</font>](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+<font color=green>【简单】</font>[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
-[88. 合并两个有序数组<font color=green>【简单】</font>](https://leetcode-cn.com/problems/merge-sorted-array/)
+<font color=green>【简单】</font>[88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 
-[24. 两两交换链表中的节点<font color=orange>【中等】</font>](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
+<font color=orange>【中等】</font>[24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
 
-[15. 三数之和<font color=orange>【中等】</font>](https://leetcode-cn.com/problems/3sum/)
+<font color=orange>【中等】</font>[15. 三数之和](https://leetcode-cn.com/problems/3sum/)
 
 ---
 
