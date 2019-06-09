@@ -12,3 +12,4 @@ def check(n, r):
 
 check(5, 2)
 check(8, 3)
+check(2146533481, 65521)
