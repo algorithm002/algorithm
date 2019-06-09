@@ -593,10 +593,46 @@ class Solution {
     }
 }
 ```
+### 解法三
+这个解法是通过review同学代码学习到的：
+1. 先将数组头尾的交换，相当于进行倒序排列。
+2. 然后再以k为中心点，两边同时头尾交换的倒序排列
+3. 这样就直接实现了，非常巧妙
+4. 使用异或操作，实现原地的数值交换
+```java
+class Solution {
+    public void rotate(int[] nums, int k) {
+        if (k == 0 || nums == null || nums.length < 2 || k % nums.length == 0) {
+            return;
+        }
+        
+        k %= nums.length;
+        
+        swap(nums, 0, nums.length - 1);
+        swap(nums, 0, k - 1);
+        swap(nums, k, nums.length - 1);
+    }
+    
+    private void swap(int[] nums, int head, int tail) {
+        while (head < tail) {
+            exchange(nums, head, tail);
+            head++;
+            tail--;
+        }
+    }
+    
+    private void exchange(int[] nums, int x, int y) {
+        nums[x] ^= nums[y];
+        nums[y] ^= nums[x];
+        nums[x] ^= nums[y];
+    }
+}
+```
 ### 收获
 从这道题中学到的：
 1. 前置条件检验的好，可以避免异常，同时能够提高效率。
 2. 解法二思考了很久，无论是看题解还是自己思考，都debug了很久才了解了大概的意思，自己禁不住要人肉在脑中算一下整个过程，否则没办法很好的理解。这一点不知道该怎么克服，但至少找到了一个问题，也算是收获。
+3. 解法三让我收获了异或的一种实用的使用方法，同时也了解一种非常巧妙地解题方式。
 ## LeetCode_15_18
 ### 题目
 给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
