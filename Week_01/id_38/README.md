@@ -3,7 +3,7 @@
 ## 第一周题目
 ---
 ### 数组、链表
- :white_check_mark: <font color=green>【简单】</font>[26. 删除排序数组中的重复项 ](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+ :white_check_mark: <font color="green">【简单】</font>[26. 删除排序数组中的重复项 ](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
 <font color=green>【简单】</font>[189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)
 
