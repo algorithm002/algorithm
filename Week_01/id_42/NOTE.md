@@ -1,7 +1,6 @@
 # 学习笔记
 
-# leefcode174 题目：
-    https://leetcode.com/problems/dungeon-game/
+# [LeetCode174 题目](https://leetcode.com/problems/dungeon-game/)
     
  这个题目主要利用动态规划，
  需要反过来想，状态方程为： 
@@ -10,8 +9,7 @@
   
  
  
-# leetCode368 题目：
-    https://leetcode.com/problems/largest-divisible-subset/
+# [leetCode368 题目](https://leetcode.com/problems/largest-divisible-subset/)
   这个题目利用了stack 这种数据结构
   时间复杂度为 0(n)  
   计算栈内数据的时候，有两个触发条件，当前数据并栈顶元素小了。或者到了最右端。
