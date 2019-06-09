@@ -45,4 +45,30 @@ public class LeetCode_189_18 {
             }
         }
     }
+
+    public void rotate2(int[] nums, int k) {
+        if (k == 0 || nums == null || nums.length < 2 || k % nums.length == 0) {
+            return;
+        }
+
+        k %= nums.length;
+
+        swap(nums, 0, nums.length - 1);
+        swap(nums, 0, k - 1);
+        swap(nums, k, nums.length - 1);
+    }
+
+    private void swap(int[] nums, int head, int tail) {
+        while (head < tail) {
+            exchange(nums, head, tail);
+            head++;
+            tail--;
+        }
+    }
+
+    private void exchange(int[] nums, int x, int y) {
+        nums[x] ^= nums[y];
+        nums[y] ^= nums[x];
+        nums[x] ^= nums[y];
+    }
 }
