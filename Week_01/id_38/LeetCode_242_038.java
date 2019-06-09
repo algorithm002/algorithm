@@ -6,13 +6,6 @@
  */
 class LeetCode_242_038 {
     
-    /**
-     * WA 
-     * 原因：ac 和 bb 的情况下 num == 0，需要判断所有字符出现次数相同
-     * @param s
-     * @param t
-     * @return
-     */
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) return false;
 
