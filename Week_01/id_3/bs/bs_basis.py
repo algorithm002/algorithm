@@ -1,16 +1,10 @@
 def bs(nums, x):
+    if not nums:
+        return -1
+    length = len(nums)
     low = 0
-    high = len(nums) - 1
-
-    while low <= high:
-        mid = low + int((high - low)/2)
-        if nums[mid] == x:
-            return mid
-        if nums[mid] > x:
-            high = mid - 1
-        else:
-            low = mid + 1
-    return -1
+    high = length - 1
+    
 
 
 print(bs([8, 11, 19, 23, 27, 33, 45, 55, 67, 98], 19) == 2)
