@@ -940,3 +940,50 @@ class Solution {
 4. 但是，如果是int的最小值，-n会导致int类型永远是最小值，进而导致栈溢出，需要先二分
 ### 收获
 主要是提交的过程中，碰到各种解题时没有想到的特殊情况，也就是问题的界限没有确定好，需要在运行的时候不断地试错。
+## LeetCode_101_18
+### 题目
+给定一个二叉树，检查它是否是镜像对称的。
+
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+```
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+```
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+```
+    1
+   / \
+  2   2
+   \   \
+   3    3
+```
+### 思路
+镜像代表：
+1. 左子树的左子树等于右子树的右子树
+2. 左子树的右子树等于右子树的左子树
+3. 根节点相同
+### 解法一
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return doCheck(root, root);
+    }
+    
+    private boolean doCheck(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        
+        if (left == null  || right == null) {
+            return false;
+        }
+        
+        return (left.val == right.val) && doCheck(left.left, right.right) && doCheck(left.right, right.left);
+    }
+}
+``` 
+### 收获
+递归的方法没有想到，大脑直接就反射性地想到了递归的方式，希望以后能够O(1)
