@@ -985,5 +985,77 @@ class Solution {
     }
 }
 ``` 
+### 解法二
+#### 思路
+思路和解法一的递归类似，使用近似BFS的方式来解
+#### 代码
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(root);
+        
+        while (!queue.isEmpty()) {
+            TreeNode left = queue.poll();
+            TreeNode right = queue.poll();
+            
+            if (left == null && right == null) {
+                continue;
+            }
+            
+            if (left == null || right == null) {
+                return false;
+            }
+            
+            if (left.val != right.val) {
+                return false;
+            }
+            
+            queue.add(left.left);
+            queue.add(right.right);
+            queue.add(left.right);
+            queue.add(right.left);
+        }
+        return true;
+    }
+}
+```
+### 解法三
+#### 思路
+和解法一一样的思路，使用stack实现，但是看网上说这个算dfs，我觉得不是啊。。。
+#### 代码
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        stack.push(root);
+        
+        while (!stack.isEmpty()) {
+            TreeNode left = stack.pop();
+            TreeNode right = stack.pop();
+            
+            if (left == null && right == null) {
+                continue;
+            }
+            
+            if (left == null || right == null) {
+                return false;
+            }
+            
+            if (left.val != right.val) {
+                return false;
+            }
+            
+            stack.push(left.left);
+            stack.push(right.right);
+            stack.push(left.right);
+            stack.push(right.left);
+        }
+        return true;
+    }
+}
+```
 ### 收获
-递归的方法没有想到，大脑直接就反射性地想到了递归的方式，希望以后能够O(1)
+对于BFS的用法有了进一步的理解和熟悉。
