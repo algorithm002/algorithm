@@ -749,7 +749,7 @@ class Solution {
 ### 解法一
 ```java
 class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null)
         {
             return l1 == null ? l2 : l1;
@@ -762,3 +762,50 @@ class Solution {
 ```
 ### 收获
 在理解这个递归解法的过程中，还是禁不住想去人肉递归一下，而且起始理解的时候也有些吃力，还是通过写下思路的方式，才能写出。还是需要多练习。
+## LeetCode_49_18
+### 题目
+给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。
+
+示例:
+```
+输入: ["eat", "tea", "tan", "ate", "nat", "bat"],
+输出:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+```
+说明：
+```
+所有输入均为小写字母。
+不考虑答案输出的顺序。
+```
+### 思路
+1. 将数组中的字符串打散，重新排序在转换回字符串，这样异位词就处理成了一样的，方便比较
+2. 将重新的排序的字符串作为key放入map中映射，value放一个list，如果一致就放入，否则新建一个list
+3. 时间复杂度是O(n)
+### 解法一
+```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return Collections.emptyList();
+        }    
+        
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s: strs) {
+            char[] cs = s.toCharArray();
+            Arrays.sort(cs);
+            String tmp = String.valueOf(cs);
+            if (!map.containsKey(tmp)) {
+                map.put(tmp, new ArrayList<>());
+            }
+            map.get(tmp).add(s);
+        }
+        return new ArrayList<>(map.values()); 
+    }
+}
+```
+### 收获
+先想再做，解题轻松。
