@@ -3,7 +3,7 @@
 ## 第一周题目
 ---
 ### 数组、链表
-<font color="green">【简单】</font>[26. 删除排序数组中的重复项 ](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+*[x]<font color="green">【简单】</font>[26. 删除排序数组中的重复项 ](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
 <font color=green>【简单】</font>[189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)
 
@@ -62,4 +62,10 @@
 [938. 二叉搜索树的范围和<font color=green>【简单】</font>](https://leetcode-cn.com/problems/range-sum-of-bst/)
 
 [236. 二叉树的最近公共祖先<font color=orange>【中等】</font>](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+> * [ ]  熟练掌握算法编码基础
+> * [ ]  掌握所有基础数据结构和算法的理论
+> * [ ]  使用 Leetcode 进行系统性练习
+> * [ ]  2019年完成 Leetcode  100题
+> * [ ]  系统性的总结、整理、分享自己的数据结构和算法学习过程
 
