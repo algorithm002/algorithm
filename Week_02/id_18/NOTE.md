@@ -67,4 +67,32 @@ class Solution {
     }
 }
 ```
+### 解法三
+#### 思路
+1. 基于解法二，其实不需要先遍历一边数组，全部放到map里，可以边遍历变放
+2. 这样也就不用判断是否重复使用当前元素
+3. 最坏情况会遍历整个数组，所以时间复杂度是O(n)
+4. 同样的空间复杂度和解法三类似，最坏情况下空间复杂度是O(n)
+#### 代码
+```java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length < 2) {
+            return new int[2];
+        }
+        
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int j = target - nums[i];
+            if (map.containsKey(j)) {
+                return new int[]{i, map.get(j)};
+            }
+            map.put(nums[i], i);
+        }
+
+        return new int[2];
+    }
+}
+```
 ### 收获
+算法可以不断地迭代改进，像生物进化一样，非常有趣。
