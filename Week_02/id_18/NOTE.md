@@ -14,7 +14,9 @@
 ```
 ### 解法一
 #### 思路
-2个for循环嵌套，暴力
+1. 2个for循环嵌套，暴力
+2. 时间复杂度O(n^2)
+3. 空间复杂度O(1)
 #### 代码
 ```java
 class Solution {
@@ -31,6 +33,36 @@ class Solution {
             }
         }
         
+        return new int[2];
+    }
+}
+```
+### 解法二
+#### 思路
+1. 先遍历数组，把元素作为key，下标作为value，放入hash表，这样也做到了去重
+2. 再遍历一遍数组，先计算target和当前元素的差，在hash表中查找这个差对应的下标，且不是当前元素的下标
+3. 这样时间复杂度就是O(n)
+4. 空间复杂度因为多了个map，所以是O(n)
+#### 代码
+```java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length < 2) {
+            return new int[2];
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int j = target - nums[i];
+            if (map.containsKey(j) && i != map.get(j)) {
+                return new int[]{i, map.get(j)};
+            }
+        }
+
         return new int[2];
     }
 }
