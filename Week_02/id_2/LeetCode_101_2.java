@@ -1,10 +1,3 @@
-package com.llz.algorithm.algorithm2019.secondweek;
-
-import com.llz.algorithm.algorithm2019.firstweek.TreeNode;
-
-import java.util.Deque;
-import java.util.LinkedList;
-
 //Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
 //
 // For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
@@ -35,6 +28,12 @@ import java.util.LinkedList;
 //Bonus points if you could solve it both recursively and iteratively.
 //
 
+package com.llz.algorithm.algorithm2019.secondweek;
+
+import com.llz.algorithm.algorithm2019.firstweek.TreeNode;
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -45,7 +44,7 @@ import java.util.LinkedList;
  * }
  */
 
-public class LeetCode101_2 {
+public class LeetCode_101_2 {
 
     /**
      * Time and space complexity is O(n), n is the number of nodes in the tree.
@@ -101,7 +100,7 @@ public class LeetCode101_2 {
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
         root.right.left = new TreeNode(5);
-        LeetCode101_2 s = new LeetCode101_2();
-        System.out.println(new LeetCode101_2().isSymmetricByTraverse(root));
+        LeetCode_101_2 s = new LeetCode_101_2();
+        System.out.println(new LeetCode_101_2().isSymmetricByTraverse(root));
     }
 }

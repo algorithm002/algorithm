@@ -1,7 +1,3 @@
-package com.llz.algorithm.algorithm2019.secondweek;
-
-import com.llz.algorithm.algorithm2019.firstweek.TreeNode;
-
 //Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
 //
 // According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
@@ -36,6 +32,10 @@ import com.llz.algorithm.algorithm2019.firstweek.TreeNode;
 //
 //
 
+package com.llz.algorithm.algorithm2019.secondweek;
+
+import com.llz.algorithm.algorithm2019.firstweek.TreeNode;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -57,7 +57,7 @@ public class LeetCode_235_2 {
      * @param root
      * @param p
      * @param q
-     * @return 
+     * @return
      */
     public TreeNode lowestCommonAncestorByTraverse1(TreeNode root, TreeNode p, TreeNode q) {
         getLowestCommonAncestor(root, p, q);
