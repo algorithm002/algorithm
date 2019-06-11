@@ -2,7 +2,7 @@
  * @lc app=leetcode id=220 lang=cpp
  *
  * [220] Contains Duplicate III
- * T(n) = O()
+ * T(n) = O(logN)
  */
 class Solution {
 public:
