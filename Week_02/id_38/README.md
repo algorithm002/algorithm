@@ -3,15 +3,15 @@
 ## 第二周题目
 ---
 ### 哈希表
-* [ ]<font color="green">【简单】</font>[1. 两数之和 ](https://leetcode-cn.com/problems/two-sum/)
+* [ ] <font color="green">【简单】</font>[1. 两数之和 ](https://leetcode-cn.com/problems/two-sum/)
 
-* [ ]<font color=green>【简单】</font>[242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+* [ ] <font color=green>【简单】</font>[242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
 
-* [ ]<font color=orange>【中等】</font>[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters)
+* [ ] <font color=orange>【中等】</font>[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters)
 
-* [ ]<font color=orange>【中等】</font>[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words)
+* [ ] <font color=orange>【中等】</font>[692. 前K个高频单词](https://leetcode-cn.com/problems/top-k-frequent-words)
 
-* [ ]<font color=red>【困难】</font>[726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms/)
+* [ ] <font color=red>【困难】</font>[726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms/)
 
 ---
 
