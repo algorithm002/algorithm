@@ -8,39 +8,39 @@ class TreeNode(object):
 class Codec:
 
     def serialize(self, root):
-        if not root:
-            return []
-        print(self.length(root, 1))
-        data = [None] * (self.length(root, 1) + 1)
-        self._s(root, 1, data)
-        return data[1:]
+        data = []
+        queue = [root]
+        none_count = 0
+        while len(queue) != 0:
+            node = queue.pop()
+            if not node:
+                none_count += 1
+                data.append(None)
+                continue
 
-    def _s(self, node, i, data):
-        if not node:
-            return
-        data[i] = node.val
-        self._s(node.left, 2*i, data)
-        self._s(node.right, 2*i+1, data)
-
-    def length(self, node, i):
-        if not node:
-            return 0
-        return max(i, self.length(node.left, 2*i), self.length(node.right, 2*i+1))
+            none_count = 0
+            data.append(node.val)
+            queue.insert(0, node.left)
+            queue.insert(0, node.right)
+        return data[:-none_count]
 
     def deserialize(self, data):
-        if data is None:
+        if not data:
             return None
-        data.insert(0, None)
-        return self._de(1, data)
 
-    def _de(self, i, data):
-        if i >= len(data):
-            return None
-        v = data[i]
-        if v is None:
-            return None
-        node = TreeNode(v)
-        i = 2 * i
-        node.left = self._de(i, data)
-        node.right = self._de(i + 1, data)
-        return node
+        root = TreeNode(data[0])
+        queue = [root]
+        length = len(data)
+        for i in range(1, length, 2):
+            node = queue.pop()
+            if data[i] is not None:
+                node.left = TreeNode(data[i])
+                queue.insert(0, node.left)
+
+            if i + 1 == length:
+                break
+            if data[i + 1] is not None:
+                node.right = TreeNode(data[i + 1])
+                queue.insert(0, node.right)
+
+        return root
