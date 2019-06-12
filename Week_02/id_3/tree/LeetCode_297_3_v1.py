@@ -10,20 +10,22 @@ class Codec:
     def serialize(self, root):
         if not root:
             return []
-        data = [None]
+        print(self.length(root, 1))
+        data = [None] * (self.length(root, 1) + 1)
         self._s(root, 1, data)
         return data[1:]
 
     def _s(self, node, i, data):
         if not node:
             return
-        length = len(data)
-        if i >= length:
-            for n in range(i - length + 1):
-                data.append(None)
         data[i] = node.val
         self._s(node.left, 2*i, data)
         self._s(node.right, 2*i+1, data)
+
+    def length(self, node, i):
+        if not node:
+            return 0
+        return max(i, self.length(node.left, 2*i), self.length(node.right, 2*i+1))
 
     def deserialize(self, data):
         if data is None:
