@@ -46,7 +46,7 @@ class Solution:
         r = []
         for k in sorted(atom_map.keys()):
             v = atom_map[k]
-            r.append('%s%s' % (k, v if v!= 1 else ''))
+            r.append('%s%s' % (k, v if v != 1 else ''))
         return ''.join(r)
 
     def handle(self, letter_list, status, cur_map):
