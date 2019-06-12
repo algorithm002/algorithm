@@ -3,7 +3,7 @@
 ## 第二周题目
 ---
 ### 哈希表
-* [ ] <font color="green">【简单】</font>[1. 两数之和 ](https://leetcode-cn.com/problems/two-sum/)
+* [x] <font color="green">【简单】</font>[1. 两数之和 ](https://leetcode-cn.com/problems/two-sum/)
 
 * [ ] <font color=green>【简单】</font>[242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
 
