@@ -12,6 +12,8 @@ class Codec:
         queue = [root]
         none_count = 0
         while len(queue) != 0:
+            if none_count >= len(queue):
+                break
             _queue = []
             for i in range(len(queue)):
                 node = queue[i]
