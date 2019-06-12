@@ -12,16 +12,19 @@ class Codec:
         queue = [root]
         none_count = 0
         while len(queue) != 0:
-            node = queue.pop()
-            if not node:
-                none_count += 1
-                data.append(None)
-                continue
+            _queue = []
+            for i in range(len(queue)):
+                node = queue[i]
+                if not node:
+                    none_count += 1
+                    data.append(None)
+                    continue
 
-            none_count = 0
-            data.append(node.val)
-            queue.insert(0, node.left)
-            queue.insert(0, node.right)
+                none_count = 0
+                data.append(node.val)
+                _queue.append(node.left)
+                _queue.append(node.right)
+            queue = _queue
         return data[:-none_count]
 
     def deserialize(self, data):
@@ -31,16 +34,27 @@ class Codec:
         root = TreeNode(data[0])
         queue = [root]
         length = len(data)
-        for i in range(1, length, 2):
-            node = queue.pop()
-            if data[i] is not None:
-                node.left = TreeNode(data[i])
-                queue.insert(0, node.left)
 
-            if i + 1 == length:
-                break
-            if data[i + 1] is not None:
-                node.right = TreeNode(data[i + 1])
-                queue.insert(0, node.right)
+        index = 1
+        while len(queue) != 0:
+            _queue = []
+            for i in range(len(queue)):
+                node = queue[i]
+                # 不可思议的问题
+                if not node:
+                    continue
+                if index >= length:
+                    return root
+                d = data[index]
+                node.left = TreeNode(d) if d is not None else None
+                _queue.append(node.left)
+                index += 1
+                if index >= length:
+                    return root
+                d = data[index]
+                node.right = TreeNode(d) if d is not None else None
+                _queue.append(node.right)
+                index += 1
+            queue = _queue
 
         return root
