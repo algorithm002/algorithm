@@ -57,9 +57,9 @@ public class LeetCode_938_2 {
     }
 
     /**
-     * There is time difference depends on how you process whether root is null.
+     * There is time cost difference depends on how you deal with the case of null root.
      * If you write "if (root == null) return;",then the function will backtrack
-     * and cost more time than if you just eliminate "root equals null" situation by writing
+     * and cost more time than if you just eliminate the "root equals null" situation by writing
      * "if (root != null) {...} ".
      * Time complexity is O(n) and space complexity is O(h)(h is height of BST).
      * If the given BST is balanced, then the time complexity is O(logn) and space complexity is O(logn) as well.
