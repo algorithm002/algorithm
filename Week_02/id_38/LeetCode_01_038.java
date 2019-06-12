@@ -41,23 +41,21 @@ class LeetCode_01_038 {
 
     public int[] twoSum2(int[] nums, int target) {
         // 暴力，时间 O(n^2)，空间 O(1)
-        int[] result = new int[2];
         for (int i = 0; i < nums.length - 1; ++i) {
             for (int j = i + 1; j < nums.length; ++j) {
                 if (nums[i] + nums[j] == target) {
-                    result[0] = i;
-                    result[1] = j;
+                    return new int[]{i, j};
                 }
             }
         }
 
-        return result;
+        throw new IllegalArgumentException("No two sum solution");
     }
 
     public static void main(String[] args) {
         LeetCode_01_038 testCode_01_038 = new LeetCode_01_038();
         int[] nums = new int[]{-1,0,1,2,-1,-4};
-        int[] result = testCode_01_038.twoSum(nums, 3);
+        int[] result = testCode_01_038.twoSum2(nums, 3);
         for (int i = 0; i < result.length; ++i) {
             System.out.print(result[i] + ",");
         }
