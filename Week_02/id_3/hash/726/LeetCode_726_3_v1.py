@@ -23,8 +23,6 @@ class Solution:
                     atom_map = {}
                     continue
                 elif c == ')':
-                    self.handle(letter_list, status, cur_map)
-                    self.merge_map(atom_map, cur_map)
                     cur_map = atom_map
                     atom_map = stack.pop()
                     status = STATUS_INIT
