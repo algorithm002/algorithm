@@ -192,3 +192,58 @@ class Solution {
 }
 ```
 ### 收获
+熟悉了BFS和DFS的搜索方式，对递归有了进一步的理解。
+## LeetCode_111
+### 题目
+给定一个二叉树，找出其最小深度。
+
+最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例:
+```
+给定二叉树 [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回它的最小深度  2.
+```
+### 解法一
+#### 思路
+使用dfs的递归方式
+1. 一开始没有审清除题目，对于从根节点到最近叶子节点的最短路径上的节点数量没有理解
+2. 叶子节点应该是没有左右子树的节点
+3. 所以如果只有一个节点，那么只递归下钻有节点地一边，另一边就不管了
+4. 然后只有当左右都为null的时候才开始计数
+5. 然后开始返回，同时还要有一个变量存储左右节点的最小的那个值，初始的时候用int的最大值
+6. 然后每一层返回的时候都需要+1，代表层数的累加。
+#### 代码
+```java
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        
+        int depth = Integer.MAX_VALUE;
+        if (root.left != null) {
+            depth = Math.min(minDepth(root.left), depth);
+        }
+        
+        if (root.right != null) {
+            depth = Math.min(minDepth(root.right), depth);
+        }
+        
+        return depth + 1;
+    }
+}
+```
+### 收获
