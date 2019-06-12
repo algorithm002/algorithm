@@ -1,5 +1,7 @@
 package Week_02.id_18;
 
+import java.util.*;
+
 /**
  * @author LiveForExperience
  * @date 2019/6/12 12:49
@@ -26,6 +28,40 @@ public class LeetCode_236_18 {
         }
 
         return mid + left + right > 0;
+    }
+
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        Map<TreeNode, TreeNode> parents = new HashMap<>();
+
+        stack.push(root);
+        parents.put(root, null);
+
+        while (!parents.containsKey(p) || !parents.containsKey(q)) {
+            TreeNode current = stack.pop();
+
+            if (current.left != null) {
+                stack.push(current.left);
+                parents.put(current.left, current);
+            }
+
+            if (current.right != null) {
+                stack.push(current.right);
+                parents.put(current.right, current);
+            }
+        }
+
+        Set<TreeNode> pAncestors = new HashSet<>();
+        while (p != null) {
+            pAncestors.add(p);
+            p = parents.get(p);
+        }
+
+        while (!pAncestors.contains(q)) {
+            q = parents.get(q);
+        }
+
+        return q;
     }
 
     private class TreeNode {

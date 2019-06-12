@@ -117,6 +117,10 @@ Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of 
 ### 解法一
 #### 思路
 dfs路径上最早重叠的那个节点，就是它们的最早祖先节点。
+1. 不断地向左右子节点搜索，如果找到返回true，否则false
+2. 判断当前节点是不是p或q的一个
+3. 如果以上三种情况有2种是true
+4. 那么说明当前节点就是最早祖先节点
 #### 代码
 ```java
 class Solution {
@@ -139,6 +143,51 @@ class Solution {
         }
 
         return mid + left + right > 0;
+    }
+}
+```
+### 解法二
+#### 思路
+使用bfs查找两个节点，同时记录查找过程中的路过的父节点
+1. 使用bfs标配的队列
+2. 使用map记录路过的父节点，这样查询父节点的时间复杂度就是O(1)
+3. 查找两个节点，当全部查到时开始生成查找p节点的父节点路径的集合
+4. 再用这个集合去让q节点的父节点来匹配，第一个匹配上的就是最早祖先
+#### 代码
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        Map<TreeNode, TreeNode> parents = new HashMap<>();
+        
+        stack.push(root);
+        parents.put(root, null);
+        
+        while (!parents.containsKey(p) || !parents.containsKey(q)) {
+            TreeNode current = stack.pop();
+            
+            if (current.left != null) {
+                stack.push(current.left);
+                parents.put(current.left, current);
+            }
+            
+            if (current.right != null) {
+                stack.push(current.right);
+                parents.put(current.right, current);
+            }
+        }
+        
+        Set<TreeNode> pAncestors = new HashSet<>();
+        while (p != null) {
+            pAncestors.add(p);
+            p = parents.get(p);
+        }
+        
+        while (!pAncestors.contains(q)) {
+            q = parents.get(q);
+        }
+        
+        return q;
     }
 }
 ```
