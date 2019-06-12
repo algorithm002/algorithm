@@ -96,3 +96,50 @@ class Solution {
 ```
 ### 收获
 算法可以不断地迭代改进，像生物进化一样，非常有趣。
+## LeetCode_236
+### 题目
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+> According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+Example 1:
+```
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+Output: 3
+Explanation: The LCA of nodes 5 and 1 is 3.
+```
+Example 2:
+```
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+Output: 5
+Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+```
+### 解法一
+#### 思路
+dfs路径上最早重叠的那个节点，就是它们的最早祖先节点。
+#### 代码
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        doRecurse(root, p, q);
+        return result;
+    }
+
+    private boolean doRecurse(TreeNode current, TreeNode p, TreeNode q) {
+        if (current == null) {
+            return false;
+        }
+
+        int left = doRecurse(current.left, p, q) ? 1 : 0;
+        int right = doRecurse(current.right, p, q) ? 1 : 0;
+        int mid = current.val == p.val || current.val == q.val ? 1 : 0;
+
+        if (mid + left + right >= 2) {
+            result = current;
+        }
+
+        return mid + left + right > 0;
+    }
+}
+```
+### 收获
