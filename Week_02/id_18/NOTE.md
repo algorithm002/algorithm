@@ -309,3 +309,67 @@ class Solution {
 ```
 ### 收获
 审清题目很重要，就像理解需求一样，如果没搞清楚，搞半天也是瞎弄。
+## LeetCode_783
+### 题目
+给定一个二叉搜索树的根结点 root, 返回树中任意两节点的差的最小值。
+
+示例：
+```
+输入: root = [4,2,6,1,3,null,null]
+输出: 1
+解释:
+注意，root是树结点对象(TreeNode object)，而不是数组。
+```
+给定的树 [4,2,6,1,3,null,null] 可表示为下图:
+```
+          4
+        /   \
+      2      6
+     / \    
+    1   3  
+
+最小的差值是 1, 它是节点1和节点2的差值, 也是节点3和节点2的差值。
+```
+注意：
+```
+二叉树的大小范围在 2 到 100。
+二叉树总是有效的，每个节点的值都是整数，且不重复。
+```
+### 解法一
+#### 思路
+二叉搜索树的两个定义，老师需要我们O(1)的时间复杂度来反应：
+1. 所有的左子树都小于根节点，所有的右子树都大于根节点，循环往复
+2. 中序搜索的路径是升序的
+所以直接就反应了使用dfs递归搜索的方式，但是没办法确定具体的逻辑，于是参考了国际站的方法：
+1. 左边子树的差值就是上一个节点减去当前节点
+2. 右边子树的差值就是当前节点减去上一个节点
+3. 然后加上要记录的最小值
+4. 于是涉及到的所有参数就是4个
+  - 当前节点
+  - 上一个节点(用左和右两个参数表示，因为不同的运算方式)
+  - 最小值
+5. 然后就是递归运算，求左右子树返回的差值中的最小值
+#### 代码
+```java
+class Solution {
+    public int minDiffInBST(TreeNode root) {
+        return doSearch(root, null, null, Integer.MAX_VALUE);
+    }
+
+    private int doSearch(TreeNode root, TreeNode leftNode, TreeNode rightNode, int min) {
+        if (root == null) {
+            return min;
+        }
+        
+        int left = leftNode == null ? Integer.MAX_VALUE : leftNode.val - root.val;
+        int right = rightNode == null ? Integer.MAX_VALUE : root.val - rightNode.val;
+        
+        min = Math.min(Math.min(left, right), min);
+
+        int leftChild = doSearch(root.left, root, rightNode, min);
+        int rightChild = doSearch(root.right, leftNode, root, min);
+        return Math.min(leftChild, rightChild);
+    }
+}
+``` 
+### 收获
