@@ -416,4 +416,56 @@ class Solution {
     }
 }
 ```
+### 解法二
+#### 思路
+借鉴国际站的dfs递归解法，同时对解法一的代码进行了优化，速度快了很多，应该算是进行了剪枝。
+1. 如果q和p的值都小于root，就搜索左子树
+2. 如果都大于root就搜索右子树
+3. 否则就说明当前节点一定是如下三种情况，且无论哪种情况，当前节点都是lca
+  - p是当前节点，且q也在这个路径上
+  - 如上，只是p和q换一下
+  - p和q分别在当前节点的左右子树的路径上
+#### 代码
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        int parentVal = root.val;
+        int pVal = p.val;
+        int qVal = q.val;
+        
+        if (pVal < parentVal && qVal < parentVal) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else if (pVal > parentVal && qVal > parentVal) {
+            return lowestCommonAncestor(root.right, p, q);
+        } else {
+            return root;
+        }  
+    }
+}
+```
+如下是对解法一的优化代码：
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+
+            if (node != null) {
+                if (p.val < node.val && q.val < node.val) {
+                    stack.push(node.left);
+                } else if (p.val > node.val && q.val > node.val){
+                    stack.push(node.right);
+                } else {
+                    return node;
+                }
+            }
+        }
+
+        return null;
+    }
+}
+```
 ### 收获
