@@ -17,10 +17,11 @@ var serialize = function(root) {
     let result = new Array();
     if(!root) return result;
     let queue = new Array();
-    queue.push(root)
+    queue.push(root);
+    let node = null;
     while(queue.length>0)
     {
-        let node = queue.shift();
+        node = queue.shift();
         if(node)
         {
             result.push(node.val);
@@ -50,23 +51,14 @@ var deserialize = function(data) {
     let currentNode  =null;
     let levelNodes = new Array();
     levelNodes.push(root);
-    while(input.length>0)
+    while(input.length)
     {
         let nextLevelNodes= new Array();  
         while(levelNodes.length>0)
         {
-            currentNode =  levelNodes.shift();
-            let leftNode = null;
-            let rightNode = null;
-            if(input.length > 0   )
-            {
-               leftNode  = new TreeNode(input.shift());
-            } 
-            if(input.length > 0 )
-            {
-
-                rightNode  = new TreeNode(input.shift());
-            }
+            currentNode =  levelNodes.shift(); 
+            let leftNode  = new TreeNode(input.shift()); 
+            let rightNode  = new TreeNode(input.shift()); 
             if(leftNode && leftNode.val != null) 
             {
                 currentNode.left=leftNode;
@@ -76,15 +68,10 @@ var deserialize = function(data) {
             {
                 currentNode.right=rightNode;
                 nextLevelNodes.push(rightNode);
-            }
-            
-           
-        }
-        
-       levelNodes = nextLevelNodes;
-        
-    }
-   // console.log(root);
+            }  
+        } 
+       levelNodes = nextLevelNodes; 
+    } 
     return root;
       
 };
