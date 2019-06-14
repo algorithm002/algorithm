@@ -5,3 +5,7 @@ Iterator
 
 import heapq 堆
 
+
+问题：
+bst + 最大值 是否等价于堆
+python 的链表/堆等数据结构是否缺失
