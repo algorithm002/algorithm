@@ -64,10 +64,59 @@ public class LeetCode_236_18 {
         return q;
     }
 
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode lca = null;
+
+        boolean oneFound = false;
+
+        Stack<Object[]> stack = new Stack<>();
+
+        stack.push(new Object[]{root, 2});
+
+        TreeNode childNode = null;
+
+        while (!stack.isEmpty()) {
+            Object[] parentArr = stack.peek();
+            if (parentArr[0] == null) {return p;}
+            TreeNode parentNode = (TreeNode) parentArr[0];
+            int parentState = (int) parentArr[1];
+            if (parentState != 0) {
+                if (parentState == 2) {
+                    if (parentNode == p || parentNode == q) {
+                        if (oneFound) {
+                            return lca;
+                        } else {
+                            lca = (TreeNode)stack.peek()[0];
+                            oneFound = true;
+                        }
+                    }
+                    childNode = parentNode.left;
+                } else {
+                    childNode = parentNode.right;
+                }
+
+                stack.pop();
+                stack.push(new Object[]{parentNode, parentState - 1});
+
+                if (childNode != null) {
+                    stack.push(new Object[]{childNode, 2});
+                }
+            } else {
+                if (stack.pop()[0] == lca && oneFound) {
+                    lca = (TreeNode) stack.peek()[0];
+                }
+            }
+        }
+        return lca;
+    }
+
     private class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode(int x) { val = x; }
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 }

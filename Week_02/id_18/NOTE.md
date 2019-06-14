@@ -191,6 +191,67 @@ class Solution {
     }
 }
 ```
+### 解法三
+#### 思路
+使用dfs非递归的方法(stack)：
+1. 从左子树开始向下查找，同时更新当前节点的状态
+  - 左右都查过
+  - 左边查好了
+  - 还没查好
+2. 通过栈不断地向下查，如果发现了和p或q相同的节点，就把它作为LCA，同时记录已经找到一个节点
+3. 如果左边检查完，那么开始检查右边
+4. 如果两边检查完，都没有找到全部两个目标节点，就把这个节点弹出，把这个弹出节点的父节点标记为LCA
+5. 循环往复，直到找到两个节点为止
+#### 代码
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode lca = null;
+
+        boolean oneFound = false;
+
+        Stack<Object[]> stack = new Stack<>();
+        
+        stack.push(new Object[]{root, 2});
+
+        TreeNode childNode = null;
+        
+        while (!stack.isEmpty()) {
+            Object[] parentArr = stack.peek();
+            if (parentArr[0] == null) {return p;}
+            TreeNode parentNode = (TreeNode) parentArr[0];
+            int parentState = (int) parentArr[1];
+            if (parentState != 0) {
+                if (parentState == 2) {
+                    if (parentNode == p || parentNode == q) {
+                        if (oneFound) {
+                            return lca;
+                        } else {
+                            lca = (TreeNode)stack.peek()[0];
+                            oneFound = true;
+                        }
+                    }
+                    childNode = parentNode.left;
+                } else {
+                    childNode = parentNode.right;
+                }
+                
+                stack.pop();
+                stack.push(new Object[]{parentNode, parentState - 1});
+                
+                if (childNode != null) {
+                    stack.push(new Object[]{childNode, 2});    
+                }
+            } else {
+                if (stack.pop()[0] == lca && oneFound) {
+                    lca = (TreeNode) stack.peek()[0];
+                }
+            }
+        }
+        return lca;
+    }
+}
+```
 ### 收获
 熟悉了BFS和DFS的搜索方式，对递归有了进一步的理解。
 ## LeetCode_111
