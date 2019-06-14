@@ -5,7 +5,11 @@ Iterator
 
 import heapq 堆
 
+技巧 python中处理数字的时候小心使用 if v 或者 if not v 这种写法
+有时候想判断None，结果在0上栽了跟头
 
 问题：
 bst + 最大值 是否等价于堆
 python 的链表/堆等数据结构是否缺失
+
+bs中很多实现使用系统最大值最小值，是否有隐患
