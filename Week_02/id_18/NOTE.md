@@ -373,3 +373,47 @@ class Solution {
 }
 ``` 
 ### 收获
+
+## LeetCode_235
+### 题目
+
+### 解法一
+#### 思路
+二叉搜索树的中序搜索是升序的，所以最早祖先就是
+1. node >= q && node <= p
+2. node <= q && node >= p
+这样直接dfs就能查到这个节点
+#### 代码
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (found(root, p, q)) {
+            return root;
+        }
+        
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            
+            if (node != null) {
+                if (found(node, p, q)) {
+                    return node;
+                }
+
+                stack.push(node.left);
+                stack.push(node.right);
+            }
+        }
+        
+        return null;
+    }
+    
+    private boolean found(TreeNode node, TreeNode p, TreeNode q) {
+        return p.val <= node.val && q.val >= node.val || 
+                p.val >= node.val && q.val <= node.val;
+    }
+}
+```
+### 收获
