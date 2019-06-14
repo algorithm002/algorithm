@@ -1,3 +1,10 @@
+"""
+    使用数组排序，居然就过了
+    代码有些丑陋，主要是对python不熟悉，不知道怎么自定义排序规则
+    理论上使用最小堆做优化效果更好
+"""
+
+
 class Solution:
     def topKFrequent(self, words, k):
         word_map = {}
