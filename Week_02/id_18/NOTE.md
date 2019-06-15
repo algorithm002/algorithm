@@ -214,7 +214,7 @@ class Solution {
         
         stack.push(new Object[]{root, 2});
 
-        TreeNode childNode = null;
+        TreeNode childNode;
         
         while (!stack.isEmpty()) {
             Object[] parentArr = stack.peek();
@@ -376,7 +376,29 @@ class Solution {
 
 ## LeetCode_235
 ### 题目
+给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
 
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+
+例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
+
+示例 1:
+```
+输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+输出: 6 
+解释: 节点 2 和节点 8 的最近公共祖先是 6。
+```
+示例 2:
+```
+输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+输出: 2
+解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。
+``` 
+说明:
+```
+所有节点的值都是唯一的。
+p、q 为不同节点且均存在于给定的二叉搜索树中。
+```
 ### 解法一
 #### 思路
 二叉搜索树的中序搜索是升序的，所以最早祖先就是
@@ -469,3 +491,64 @@ class Solution {
 }
 ```
 ### 收获
+用到了剪枝，优化的效果非常明显，也进一步熟悉了dfs的递归和非递归的用法
+## LeetCode_3
+### 题目
+给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+
+示例 1:
+```
+输入: "abcabcbb"
+输出: 3 
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+```
+示例 2:
+```
+输入: "bbbbb"
+输出: 1
+解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+示例 3:
+```
+```
+输入: "pwwkew"
+输出: 3
+解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+```
+### 解法一
+#### 思路
+首先吸取之前叶子节点审题不清的教训，分清除了子序列和子串之间的区别。这题是要计算最长的字串。所以不是简单的去重计算字符个数。
+1. 使用hash表去重
+2. 因为每次重复的时候，意味着从重复的那个字符的后一位开始重新计算长度，所以需要递归的重复计算subString那个字符后的新字符串
+3. 然后递归返回的时候比一下这一层和返回的那层的长度最大值
+#### 代码
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || "".equals(s)) {
+            return 0;
+        }
+
+        if (s.length() == 1) {
+            return 1;
+        }
+        
+        return doCheck(s);       
+    }
+    
+    private int doCheck(String s) {
+        Set<Character> set = new HashSet<>();
+        char[] cs = s.toCharArray();
+        for (char c : cs) {
+            if (set.contains(c)) {
+                return Math.max(set.size(), doCheck(s.substring(s.indexOf(c) + 1)));
+            }
+            set.add(c);
+        }
+        
+        return set.size();
+    }
+}
+```
+### 收获
+肯定可以优化呀，pr以后继续优化一下。
