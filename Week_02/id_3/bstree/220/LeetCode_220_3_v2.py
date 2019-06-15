@@ -1,11 +1,19 @@
 """
 暴力解法时间复杂度 O(kn) 似乎实现没什么难度，但是想必无法通过测试
 但是上一个解法python实现效率太差了，试试暴力行不行
+没想到还真通过了
 """
 
 
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums, k, t):
+        if not nums:
+            return False
+        if k == 0:
+            return False
+        if t < 0:
+            return False
+
         if k > t:
             return self.tn(nums, k, t)
         else:
