@@ -18,7 +18,7 @@ class Solution:
         length = len(nums)
 
         if k > length:
-            k = length
+            k = length - 1
 
         if length == 1:
             return False
