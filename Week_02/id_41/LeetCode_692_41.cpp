@@ -2,7 +2,6 @@
 * @lc app=leetcode id=692 lang=cpp
 *
 * [692] Top K Frequent Words
-* T(n) = O(N), N is word count.
 */
 class Solution
 {
@@ -12,7 +11,7 @@ public:
         vector<string> res;
         unordered_map<string, int> m;
         auto comp = [](pair<int, string> &a, pair<int, string> &b) {
-            // firstÎª³öÏÖ´ÎÊı£¬secondÎª×ÖÄ¸Ë³ĞòÅÅÁĞ
+            // firstä¸ºå‡ºç°æ¬¡æ•°ï¼Œsecondä¸ºå­—æ¯é¡ºåºæ’åˆ—
             return a.first == b.first ? a.second < b.second : a.first > b.first;
         };
         priority_queue<pair<int, string>, vector<pair<int, string>>, decltype(comp)> pq(comp);
