@@ -17,7 +17,7 @@ public class LeetCode_242_18 {
         }
 
         char[] tc = t.toCharArray();
-        for (char sc: s.toCharArray()) {
+        for (char sc : s.toCharArray()) {
             for (int i = 0; i < tc.length; i++) {
                 if (sc == tc[i]) {
                     tc[i] = '#';
@@ -26,7 +26,7 @@ public class LeetCode_242_18 {
             }
         }
 
-        for (char c: tc) {
+        for (char c : tc) {
             if (c != '#') {
                 return false;
             }
@@ -41,7 +41,7 @@ public class LeetCode_242_18 {
         }
 
         Map<String, Long> map = Arrays.stream(s.split("")).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        for (String ts: t.split("")) {
+        for (String ts : t.split("")) {
             if (map.containsKey(ts)) {
                 map.put(ts, map.get(ts) - 1);
                 continue;
@@ -49,7 +49,7 @@ public class LeetCode_242_18 {
             return false;
         }
 
-        for (Long value: map.values()) {
+        for (Long value : map.values()) {
             if (value != 0) {
                 return false;
             }
@@ -64,8 +64,8 @@ public class LeetCode_242_18 {
         }
 
         Map<Integer, Long> map = s.chars().boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        for (char c: t.toCharArray()) {
-            int ci = (int)c;
+        for (char c : t.toCharArray()) {
+            int ci = (int) c;
             if (map.containsKey(ci)) {
                 map.put(ci, map.get(ci) - 1);
                 continue;
@@ -73,7 +73,7 @@ public class LeetCode_242_18 {
             return false;
         }
 
-        for (Long value: map.values()) {
+        for (Long value : map.values()) {
             if (value != 0) {
                 return false;
             }
@@ -105,7 +105,7 @@ public class LeetCode_242_18 {
             countArr[ct[i] - 'a']--;
         }
 
-        for (int i: countArr) {
+        for (int i : countArr) {
             if (i != 0) {
                 return false;
             }
@@ -114,7 +114,7 @@ public class LeetCode_242_18 {
         return true;
     }
 
-    public boolean isAnagram6( String s, String t) {
+    public boolean isAnagram6(String s, String t) {
         if (s == null || t == null || s.length() != t.length()) {
             return false;
         }
@@ -122,14 +122,28 @@ public class LeetCode_242_18 {
                 73, 79, 83, 89, 97, 101};
         BigDecimal productS = BigDecimal.valueOf(1);
         BigDecimal productT = BigDecimal.valueOf(1);
-        for (int i = 0; i < s.length(); i++)
-        {
+        for (int i = 0; i < s.length(); i++) {
             productS = productS.multiply(BigDecimal.valueOf(prime[s.charAt(i) - 'a']));
         }
-        for (int i = 0; i < t.length(); i++)
-        {
+        for (int i = 0; i < t.length(); i++) {
             productT = productT.multiply(BigDecimal.valueOf(prime[t.charAt(i) - 'a']));
         }
         return productS.compareTo(productT) == 0;
+    }
+
+    public boolean isAnagram7(String s, String t) {
+        int[] alphabet = new int[26];
+        for (char c : s.toCharArray()) {
+            alphabet[c - 'a']++;
+        }
+        for (char c : t.toCharArray()) {
+            alphabet[c - 'a']--;
+        }
+        for (int a : alphabet) {
+            if (a != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

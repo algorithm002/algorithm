@@ -552,3 +552,48 @@ class Solution {
 ```
 ### 收获
 肯定可以优化呀，pr以后继续优化一下。
+## LeetCode_242
+### 题目
+给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+
+示例 1:
+```
+输入: s = "anagram", t = "nagaram"
+输出: true
+```
+示例 2:
+```
+输入: s = "rat", t = "car"
+输出: false
+说明:
+你可以假设字符串只包含小写字母。
+```
+### 解法一
+#### 思路
+使用长度为26的int数组代表字符串中可能出现的字符
+1. 两个字符数组分别遍历
+2. 一个遍历的时候使用**字符 - 'a'**的方式对应到长度26的数组下标上++
+3. 另一个就--
+4. 最后再遍历字符数组，只要哪个元素不是0，就说明两个不是异位词
+#### 代码
+```java
+public class Solution {
+    public boolean isAnagram7(String s, String t) {
+        int[] alphabet = new int[26];
+        for (char c : s.toCharArray()) {
+            alphabet[c - 'a']++;
+        }
+        for (char c : t.toCharArray()) {
+            alphabet[c - 'a']--;
+        }
+        for (int a : alphabet) {
+            if (a != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+### 收获
+242题之前做过很多种解，这次是从一个同学的代码中review到的，和我之前的某一个解法类似，但思路更清晰，代码更简单，学习了。
