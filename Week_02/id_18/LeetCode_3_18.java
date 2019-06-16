@@ -1,6 +1,8 @@
 package Week_02.id_18;
 
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -31,5 +33,27 @@ public class LeetCode_3_18 {
         }
 
         return set.size();
+    }
+
+
+    public int lengthOfLongestSubstring1(String s) {
+        Deque<Character> characterDeque = new LinkedList<>();
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (characterDeque.contains(c)) {
+                int len = characterDeque.size();
+                if (len > result) {
+                    result = len;
+                }
+                while (c != characterDeque.peek()) {
+                    characterDeque.poll();
+                }
+                characterDeque.poll();
+            }
+            characterDeque.add(c);
+        }
+        int size = characterDeque.size();
+        return size > result ? size : result;
     }
 }

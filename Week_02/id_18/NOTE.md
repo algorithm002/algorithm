@@ -550,6 +550,39 @@ class Solution {
     }
 }
 ```
+### 解法二
+#### 思路
+使用队列存储字符，利用先进先出的特性，加上字符串中的字符下标，实现解法一的递归subString的逻辑
+1. 遍历字符数组;
+2. 把不重复的字符直接放入队列;
+3. 如果队列中有重复的字符，说明到了计算长度的时候了，算一下暂存长度的变量和队列的长度谁长，并暂存那个长的;
+4. 把队列中与当前字符重复的字符及之前的其他字符全部出队;
+5. 然后循环往复，并最后返回队列及暂存变量中长的那个作为结果。
+#### 代码
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Deque<Character> characterDeque = new LinkedList<>();
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (characterDeque.contains(c)) {
+                int len = characterDeque.size();
+                if (len > result) {
+                    result = len;
+                }
+                while (c != characterDeque.peek()) {
+                    characterDeque.poll();
+                }
+                characterDeque.poll();
+            }
+            characterDeque.add(c);
+        }
+        int size = characterDeque.size();
+        return size > result ? size : result;
+    }
+}
+```
 ### 收获
 肯定可以优化呀，pr以后继续优化一下。
 ## LeetCode_242
