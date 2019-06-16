@@ -40,6 +40,8 @@ class LeetCode_01_038 {
     }
 
     public int[] twoSum2(int[] nums, int target) {
+        // check valid
+
         // 暴力，时间 O(n^2)，空间 O(1)
         for (int i = 0; i < nums.length - 1; ++i) {
             for (int j = i + 1; j < nums.length; ++j) {
@@ -54,7 +56,7 @@ class LeetCode_01_038 {
 
     public static void main(String[] args) {
         LeetCode_01_038 testCode_01_038 = new LeetCode_01_038();
-        int[] nums = new int[]{-1,0,1,2,-1,-4};
+        int[] nums = new int[]{-1};
         int[] result = testCode_01_038.twoSum2(nums, 3);
         for (int i = 0; i < result.length; ++i) {
             System.out.print(result[i] + ",");
