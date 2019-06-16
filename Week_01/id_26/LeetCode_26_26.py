@@ -6,8 +6,7 @@ class Solution(object):
         """
         k = 1
         for n in nums:
-            if n != nums[k-1]:
+            if n != nums[k - 1]:
                 nums[k] = n
                 k += 1
         return k
-        
