@@ -31,10 +31,4 @@ public class LeetCode_703_18 {
             this.queue.offer(num);
         }
     }
-
-    public static void main(String[] args) {
-        int[] arr = new int[]{1,2,3,4};
-        arr = Arrays.copyOfRange(arr, 1, arr.length);
-        System.out.println(Arrays.toString(arr));
-    }
 }

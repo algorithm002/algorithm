@@ -142,3 +142,75 @@ class KthLargest {
 ```
 ### 收获
 学习到了PriorityQueue的用法，平常不太使用。
+## LeetCode_104
+### 题目
+
+### 解法一
+#### 思路
+dfs非递归
+1. 两个stack分别存当前下钻的那个节点node，及下钻时的深度count，还有一个max变量存最大值
+2. 遍历nodeStack的时候，将node和count分别出栈，计算count和max的最大值
+3. 上面一步干完后，开始准备下钻，分别走左右两边，判断是否为空
+4. 不为空就把对应一边的节点入栈，同时count+1以后也入栈，开始下一步
+5. 最后返回max
+#### 代码
+```java
+class Solution {
+    private Stack<TreeNode> nodeStack = new Stack<>();
+    private Stack<Integer> countStack = new Stack<>();
+    
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        nodeStack.push(root);
+        countStack.push(1);
+        int max = 0;
+
+        while (!nodeStack.empty()) {
+            TreeNode node = nodeStack.pop();
+            int count = countStack.pop();
+            max = Math.max(max, count);
+
+            drillDownAndCount(node.left, count);
+            drillDownAndCount(node.right, count);
+        }
+
+        return max;
+    }
+
+    private void drillDownAndCount(TreeNode node, int count) {
+        if (node != null) {
+            nodeStack.push(node);
+            countStack.push(count + 1);
+        }
+    }
+}
+```
+### 解法二
+#### 思路
+dfs递归，和解法一思路差不多，但是代码简单不少
+1. 建一个函数，用来递归，有两个参数分别是上一层层数和当前层节点
+2. 如果节点为空，就把上一层的层数返回
+3. 否则就在层数上+1，标记这一层探索过，然后继续下钻
+4. 返回的时候是比左右节点的大小，取大的值
+#### 代码
+```java
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        return doSearch(0, root);
+    }
+
+    private int doSearch(int level, TreeNode root) {
+        if (root == null) {
+            return level;
+        }
+
+        level++;
+
+        return Math.max(doSearch(level, root.left), doSearch(level, root.right));
+    }
+}
+```
+### 收获
