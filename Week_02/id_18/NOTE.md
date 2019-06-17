@@ -583,8 +583,42 @@ class Solution {
     }
 }
 ```
+### 解法三
+#### 思路
+在解法一中，每一层的下钻都会new出一个set对象，这样大大浪费了空间，于是只使用一个set贯穿始终。这样大大减少了空间占用的情况。
+#### 代码
+```java
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || "".equals(s)) {
+            return 0;
+        }
+
+        if (s.length() == 1) {
+            return 1;
+        }
+
+        Set<Character> set = new HashSet<>();
+        return doCheck(s, set);
+    }
+
+    private int doCheck(String s, Set<Character> set) {
+        char[] cs = s.toCharArray();
+        for (char c : cs) {
+            if (set.contains(c)) {
+                int len = set.size();
+                set.clear();
+                return Math.max(len, doCheck(s.substring(s.indexOf(c) + 1), set));
+            }
+            set.add(c);
+        }
+
+        return set.size();
+    }
+}
+```
 ### 收获
-肯定可以优化呀，pr以后继续优化一下。
+肯定可以优化呀，pr以后继续优化一下。在解法三种对解法一的空间复杂度情况进行了优化。
 ## LeetCode_242
 ### 题目
 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
