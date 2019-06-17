@@ -15,24 +15,18 @@ class Solution:
 
         return nums
 
-    def bs(self, nums, v):
-        if not nums:
-            nums.append(v)
-            return 0
-
+    def bs(self, _sorted, v):
         low = 0
-        length = len(nums)
-        high = length - 1
+        high = len(_sorted) - 1
         while low <= high:
-            mid = low + int((high-low)/2)
-            if nums[mid] >= v:
+            mid = low + (high-low)//2
+            if _sorted[mid] >= v:
                 high = mid - 1
             else:
                 low = mid + 1
 
-        index = high + 1
-        nums.insert(index, v)
-        return index
+        _sorted.insert(low, v)
+        return low
 
 
 s = Solution()
