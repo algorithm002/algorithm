@@ -11,8 +11,6 @@
   - 递归下钻中只要发现仍然是1的，就把这个为1的方块设置为0，这样在最外层遍历的时候，就不会重复的进到这里执行逻辑了，也可以理解成已经检查过
   - 如果行列的坐标超出了二维数组的边界，或者遇到的是0的时候，就返回
 3. 在二维数组遍历结束以后，就返回计数值即可
-
-这个解法是从国际站上看来的，也记得覃老师也在课上讲过，思路非常巧妙，代码也非常简洁。真的很赞。
 #### 代码
 ```java
 class Solution {
@@ -49,6 +47,70 @@ class Solution {
         drown(grid, row, col + 1);
         drown(grid, row - 1, col);
         drown(grid, row, col - 1);
+    }
+}
+```
+### 收获
+这个解法是从国际站上看来的，也记得覃老师也在课上讲过，思路非常巧妙，代码也非常简洁。真的很赞。
+## LeetCode_703
+### 题目
+设计一个找到数据流中第K大元素的类（class）。注意是排序后的第K大元素，不是第K个不同的元素。
+
+你的 KthLargest 类需要一个同时接收整数 k 和整数数组nums 的构造器，它包含数据流中的初始元素。每次调用 KthLargest.add，返回当前数据流中第K大的元素。
+
+示例:
+```
+int k = 3;
+int[] arr = [4,5,8,2];
+KthLargest kthLargest = new KthLargest(3, arr);
+kthLargest.add(3);   // returns 4
+kthLargest.add(5);   // returns 5
+kthLargest.add(10);  // returns 5
+kthLargest.add(9);   // returns 8
+kthLargest.add(4);   // returns 8
+说明: 
+你可以假设 nums 的长度≥ k-1 且k ≥ 1。
+```
+### 解法一
+#### 思路
+
+#### 代码
+```java
+
+```
+### 解法二
+#### 思路
+使用优先级队列，使用升序排序
+1. 因为是升序队列，队列顶部会是入队元素中最小的一个
+2. 在队列不足k个元素的时候随意入队
+3. 当队列个数等于k个后，队顶的那个元素就可以和之后入队的元素进行比较，比队大的就进行替换，一直保持队列中保持所有元素最大的k个
+4. 结果就直接返回队顶元素
+#### 代码
+```java
+class KthLargest {
+    private Queue<Integer> queue;
+    private int k;
+    
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        this.queue = new PriorityQueue<>(k);
+        for (int num: nums) {
+            offer(num);
+        }
+    }
+    
+    public int add(int val) {
+        offer(val);
+        return this.queue.peek();
+    }
+    
+    private void offer(int num) {
+        if (this.queue.size() < this.k) {
+            this.queue.offer(num);
+        } else if (this.queue.peek() > num) {
+            this.queue.poll();
+            this.queue.offer(num);
+        }
     }
 }
 ```
