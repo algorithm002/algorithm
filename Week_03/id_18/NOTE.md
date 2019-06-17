@@ -71,14 +71,40 @@ kthLargest.add(4);   // returns 8
 说明: 
 你可以假设 nums 的长度≥ k-1 且k ≥ 1。
 ```
-### 解法一
+### 失败的解法
 #### 思路
+1. 将数组排序，截取最大的k个
+2. 每次add的时候都和第一个元素比较，如果比它大，就先替换
+3. 然后对数组重新排序
+4. 返回数组的第一个元素
 
+这种计算的结果是超出限制时间，看了leetcode的测试用例，k非常大，因为我每次都要在add的时候对数组进行排序，所以非常耗时。
 #### 代码
 ```java
-
+class KthLargest {
+    int[] nums;
+    int k;
+    
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        Arrays.sort(nums);
+        this.nums = nums.length < k ? nums : Arrays.copyOfRange(nums, nums.length - k, nums.length);
+    }
+    
+    public int add(int val) {
+        if (nums.length < k) {
+            nums = Arrays.copyOf(nums, nums.length + 1);
+            nums[nums.length - 1] = val;
+        } else if (nums[0] < val){
+            nums[0] = val;
+        }
+        
+        Arrays.sort(nums);
+        return nums[0];
+    }
+}
 ```
-### 解法二
+### 解法一
 #### 思路
 使用优先级队列，使用升序排序
 1. 因为是升序队列，队列顶部会是入队元素中最小的一个
@@ -115,3 +141,4 @@ class KthLargest {
 }
 ```
 ### 收获
+学习到了PriorityQueue的用法，平常不太使用。
