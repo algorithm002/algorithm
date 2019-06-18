@@ -1,5 +1,7 @@
 package Week_03.id_18;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -45,6 +47,33 @@ public class LeetCode_104_18 {
             nodeStack.push(node);
             countStack.push(count + 1);
         }
+    }
+
+    public int maxDepth2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        int count = 0;
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int nodeNum = queue.size();
+            while (nodeNum-- > 0) {
+                 TreeNode node = queue.poll();
+                 if (node.left != null) {
+                     queue.offer(node.left);
+                 }
+
+                 if (node.right != null) {
+                     queue.offer(node.right);
+                 }
+            }
+            count++;
+        }
+
+        return count;
     }
 
     private class TreeNode {

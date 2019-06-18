@@ -213,4 +213,44 @@ public class Solution {
     }
 }
 ```
+### 解法三
+#### 思路
+使用bfs，思路和解法一、二略有不同，因为是广度优先搜索，所以不需要取比较左右子树节点返回的深度最大值，只需要一层层的扫就可以了。
+1. 一个队列存放当前层的节点
+2. 遍历队列，获得当前层节点的个数
+3. 然后分别再去判断这些节点是否有子节点，把那些子节点放入队列，作为下一层需要判断的节点。
+4. 同时在当前层对count值+1，计数
+5. 循环往复，最终返回count
+#### 代码
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        int count = 0;
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int nodeNum = queue.size();
+            while (nodeNum-- > 0) {
+                 TreeNode node = queue.poll();
+                 if (node.left != null) {
+                     queue.offer(node.left);
+                 }
+
+                 if (node.right != null) {
+                     queue.offer(node.right);
+                 }
+            }
+            count++;
+        }
+
+        return count;
+    }
+}
+```
 ### 收获
+进一步熟练了dfs的2种解法，bfs的1种解法。
