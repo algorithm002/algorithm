@@ -21,9 +21,11 @@ def build_node(nums, i):
     return node
 
 
-import lc_104_v1
+import LeetCode_104_3_v1
+import LeetCode_104_3_v2
 
-f = lc_104_v1.max_depth
+# f = LeetCode_104_3_v1.max_depth
+f = LeetCode_104_3_v2.max_depth
 
 
 def check(nums, r):
@@ -32,3 +34,4 @@ def check(nums, r):
 
 
 check([3, 9, 20, None, None, 15, 7], 3)
+check([0, 2, 4, 1, None, 3, -1, 5, 1, None, 6, None, 8], 4)
