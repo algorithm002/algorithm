@@ -328,6 +328,45 @@ class Solution {
 ```
 ### 解法二
 #### 思路
-
+使用bfs来解这个题，遇到的第一个叶子节点，就把count返回，过程和104题的bfs解法类似，只不过不用走到最后
 #### 代码
+```java
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        int count = 0;
+        queue.offer(root);
+        
+        while (!queue.isEmpty()) {
+            int nodeSize = queue.size();
+            count++;
+            while (nodeSize-- > 0) {
+                TreeNode node = queue.poll();
+                if (node.right == null && node.left == null) {
+                    return count;
+                }
+                
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+```
 ### 收获
+再一次的熟悉了dfs和bfs，做类似题有点快了。

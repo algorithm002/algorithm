@@ -1,5 +1,7 @@
 package Week_03.id_18;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -67,7 +69,42 @@ public class LeetCode_111_18 {
         return min;
     }
 
-    private class TreeNode {
+    public int minDepth2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        int count = 0;
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int nodeSize = queue.size();
+            count++;
+
+            while (nodeSize-- > 0) {
+                TreeNode node = queue.poll();
+                if (node.right == null && node.left == null) {
+                    return count;
+                }
+
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+        }
+
+        return count;
+    }
+
+        private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
