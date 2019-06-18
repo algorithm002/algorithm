@@ -370,3 +370,60 @@ class Solution {
 ```
 ### 收获
 再一次的熟悉了dfs和bfs，做类似题有点快了。
+## LeetCode_429
+### 题目
+给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。
+
+例如，给定一个3叉树，返回其层序遍历:
+```
+[
+     [1],
+     [3,2,4],
+     [5,6]
+]
+```
+
+说明:
+```
+树的深度不会超过 1000。
+树的节点总数不会超过 5000。
+```
+### 解法一
+#### 思路
+使用bfs
+1. 使用队列
+2. 每一层干两件事：
+  - 遍历当前层节点，并往队列里入下一层的节点
+  - 把当前层的val放入当前层的list种，再在当前层节点遍历完以后，放入整个结果的list中
+3. 循环结束，返回result
+#### 代码
+```java
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.offer(root);
+        
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> levelNodeVals = new ArrayList<>(count);
+            while (count-- > 0) {
+                Node node = queue.poll();
+                levelNodeVals.add(node.val);
+                for (Node childNode: node.children) {
+                    queue.offer(childNode);
+                }
+            }
+            
+            result.add(levelNodeVals);
+        }
+        
+        return result;    
+    }
+}
+```
+### 收获
