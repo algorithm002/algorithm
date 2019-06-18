@@ -4,20 +4,16 @@ class Solution:
             return 0
         stack = []
         node = root
-        diff = None
-        last = None
+        # 题目中有说明取值在 2 - 100
+        diff = 99
+        last = -100
         while stack or node:
             if node:
                 stack.append(node)
                 node = node.left
             else:
                 node = stack.pop()
-                if last:
-                    if diff:
-                        diff = min(diff, node.val - last)
-                    else:
-                        diff = node.val - last
-
+                diff = min(diff, node.val - last)
                 last = node.val
                 node = node.right
 
