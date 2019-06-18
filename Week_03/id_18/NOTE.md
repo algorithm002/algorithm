@@ -254,3 +254,80 @@ class Solution {
 ```
 ### 收获
 进一步熟练了dfs的2种解法，bfs的1种解法。
+## LeetCode_111
+### 题目
+给定一个二叉树，找出其最小深度。
+
+最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例:
+```
+给定二叉树 [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回它的最小深度  2.
+```
+### 解法一
+#### 思路
+和104题的思路是一样的，使用dfs的非递归方法，递归方法在第2周的时候写过
+1. 把root为空，root左右子树为空的情况先去掉
+2. 用nodeStack栈来保存dfs深度搜索使用的节点，维护顺序
+3. 用countStack栈来保存层数，维护顺序，和nodeStack顺序一致就可以
+4. 每次循环都把两个栈的第一个元素弹出，因为顺序一致，这两个出栈元素其实就代表了探索到的这个node和它所在的层数
+5. 当左右子树不为空的时候，分别把左右子树压入nodeStack栈，同时把count+1分别压入countStack栈
+6. 当nodeStack出栈的这个节点的左右子树都为空的时候，把count和min作比较，取小的那个
+7. 循环往复，最后返回min作为结果
+#### 代码
+```java
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        
+        Stack<TreeNode> nodeStack = new Stack<>();
+        Stack<Integer> countStack = new Stack<>();
+        
+        nodeStack.push(root);
+        countStack.push(1);
+        
+        int min = Integer.MAX_VALUE;
+        
+        while (!nodeStack.empty()) {
+            TreeNode node = nodeStack.pop();
+            int count = countStack.pop();
+            
+            if (node.left == null && node.right == null) {
+                min = Math.min(count, min);
+            } 
+            
+            if (node.left != null) {
+                nodeStack.push(node.left);
+                countStack.push(count + 1);
+            } 
+            
+            if (node.right != null) {
+                nodeStack.push(node.right);
+                countStack.push(count + 1);
+            }
+        }
+        
+        return min;
+    }
+}
+```
+### 解法二
+#### 思路
+
+#### 代码
+### 收获
