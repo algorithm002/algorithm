@@ -513,3 +513,67 @@ class Solution {
 3. 在看了国际站的sol以后才有了具体的思路
 
 但发现这个过程其实对我自己有很大的帮助，想过以后再看别人的解法，尤其是和自己脑中的大概思路类似的解法，理解起来就非常快，记忆也更深刻。
+## LeetCode
+### 题目
+中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
+
+例如，
+
+[2,3,4] 的中位数是 3
+
+[2,3] 的中位数是 (2 + 3) / 2 = 2.5
+
+设计一个支持以下两种操作的数据结构：
+```
+void addNum(int num) - 从数据流中添加一个整数到数据结构中。
+double findMedian() - 返回目前所有元素的中位数。
+```
+示例：
+```
+addNum(1)
+addNum(2)
+findMedian() -> 1.5
+addNum(3) 
+findMedian() -> 2
+```
+### 解法一
+#### 思路
+参考国内站的解法，使用两个堆来解决，反别是大顶堆和小顶堆
+1. 对两个堆设定2个前提：
+  - 大顶堆的堆顶元素永远小于或等于小顶堆的堆顶元素
+  - 大顶堆的元素个数：
+    - 在总个数为奇数的时候比小顶堆多1个
+    - 在总个数为偶数的时候和小顶堆一样
+2. 先将元素放入大顶堆排序，获得大顶堆中的最大值
+3. 再将这个最大值放入小顶堆中，获得小顶堆的最小值
+4. 如果这个时候总个数是奇数，就把小顶堆的那个堆顶元素还给大顶堆
+5. 通过以上3步就可以使得计算只围绕两个堆顶元素来进行
+  - 奇数的时候，大顶堆的那个最大值就是中位数
+  - 偶数的时候，两个堆的堆顶元素平均值就是中位数
+#### 代码
+```java
+class MedianFinder {
+    private int count;
+    private Queue<Integer> maxHeap;
+    private Queue<Integer> minHeap;
+    /** initialize your data structure here. */
+    public MedianFinder() {
+        maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        minHeap = new PriorityQueue<>();
+    }
+
+    public void addNum(int num) {
+        count++;
+        maxHeap.offer(num);
+        minHeap.offer(maxHeap.poll());
+        if ((count & 1) == 1) {
+            maxHeap.offer(minHeap.poll());
+        }
+    }
+
+    public double findMedian() {
+        return (count & 1) == 0 ? (new Double(maxHeap.peek()) + new Double(minHeap.peek())) / 2 : maxHeap.peek();
+    }
+}
+```
+### 收获
