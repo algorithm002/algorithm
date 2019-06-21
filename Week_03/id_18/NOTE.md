@@ -513,7 +513,7 @@ class Solution {
 3. 在看了国际站的sol以后才有了具体的思路
 
 但发现这个过程其实对我自己有很大的帮助，想过以后再看别人的解法，尤其是和自己脑中的大概思路类似的解法，理解起来就非常快，记忆也更深刻。
-## LeetCode
+## LeetCode_295
 ### 题目
 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
 
@@ -576,4 +576,79 @@ class MedianFinder {
     }
 }
 ```
+### 失败解法
+#### 思路
+每次都进行排序，然后返回中位数，暴力简单。但是耗时超出了测试要求。
+#### 代码
+```java
+class MedianFinder {
+    private List<Integer> list;
+    
+    public MedianFinder() {
+        list = new ArrayList();
+    }
+
+    public void addNum(int num) {
+        list.add(num);
+    }
+
+    public double findMedian() {
+        Collections.sort(list);
+        int midNum = list.size() / 2;
+        return (list.size() & 1) == 0 ? (new Double(list.get(midNum - 1)) + new Double(list.get(midNum))) / 2 : list.get(midNum);
+    }
+}
+```
+### 解法二
+#### 思路
+在失败解法的基础上发现，整个算法最耗时的部分就是排序，提升效率的方式就是加快排序。参考了国际站的解法。在**插入的时候对数组进行二分法排序找到需要插入的位置**。
+1. 确定left和right游标，设定一个循环条件left<right
+2. 不断地比较中间值和num之间的大小来判断是让哪个游标变动
+  - 如果是num小于中间值，那么意味num在左半部分，right游标移到这次的中间位置
+  - 如果是大于，则说明在右边部分，left游标移到中间位置+1的地方
+3. 在游标不断变化的过程中，最终left游标最终会放置在比mid数大或等于数所在的坐标位置
+#### 代码
+```java
+class MedianFinder {
+    private List<Integer> list;
+    
+    public MedianFinder() {
+        list = new ArrayList();
+    }
+
+        public void addNum(int num) {
+        if (list.isEmpty()) {
+            list.add(num);
+            return;
+        }
+        
+        int left = 0, right = list.size() - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2, val = list.get(mid);
+            if (num < val) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        
+        if (list.get(list.size() - 1) < num) {
+            list.add(num);
+        } else {
+            list.add(left, num);
+        }
+    }
+
+    public double findMedian() {
+        int len = list.size(),  midNum = len / 2;
+        return (len & 1) == 0 ? ((double) list.get(midNum - 1) + (double) list.get(midNum)) / 2 : list.get(midNum);
+    }
+}
+```
 ### 收获
+1. 学到了使用两个堆来解这类确定中位数的方式，思路非常巧妙。
+2. 之后尝试的暴力解法，通过某一个部分的优化，也解出了问题，整个过程很有收获：
+  1. 找到瓶颈
+  2. 尝试优化的方法
+  3. 如果失败，循环往复
