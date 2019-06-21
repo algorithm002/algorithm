@@ -1,3 +1,14 @@
+"""
+经典的拓扑排序
+numCourses 课程数
+prerequisites 课程依赖关系 也就是边列表
+DFS
+
+由于我使用的是从起点向后下钻，当遇到新的入度为0的节点才下钻，所以不会出现死循环的问题。
+如果是从后向前，或者不判断入度数量，可能就需要一个visited的缓存来判断是否在迭代过程中出现了环。
+"""
+
+
 class Solution:
     def findOrder(self, numCourses, prerequisites):
         node_list = list([] for _ in range(numCourses))
@@ -8,28 +19,20 @@ class Solution:
             topology_list[t] += 1
 
         results = []
-        visited = set()
         for e in list(filter(lambda e: e[1] == 0, enumerate(topology_list))):
             results.append(e[0])
-            if not self.dfs(e[0], node_list, topology_list, visited, results):
-                return []
+            self.dfs(e[0], node_list, topology_list, results)
 
         if len(results) != numCourses:
             return []
         return results
 
-    def dfs(self, node, node_list, topology_list, visited, results):
-        if node in visited:
-            return False
-        visited.add(node)
+    def dfs(self, node, node_list, topology_list, results):
         for sn in node_list[node]:
             topology_list[sn] -= 1
             if topology_list[sn] == 0:
                 results.append(sn)
-                if not self.dfs(sn, node_list, topology_list, visited, results):
-                    return False
-        visited.remove(node)
-        return True
+                self.dfs(sn, node_list, topology_list, results)
 
 
 s = Solution()

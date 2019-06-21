@@ -30,7 +30,6 @@ class Solution:
 
     def dfs(self, node, node_list, topology_list):
         for sn in node_list[node]:
-            print('sn', sn)
             topology_list[sn] -= 1
             if topology_list[sn] == 0:
                 self.dfs(sn, node_list, topology_list)
@@ -41,4 +40,5 @@ s = Solution()
 # print(s.canFinish(2, [[1, 0], [0, 1]]))
 # print(s.canFinish(3, [[0, 1], [0, 2], [1, 2]]))
 # print(s.canFinish(3, [[1, 0], [2, 0]]))
-print(s.canFinish(3, [[0, 1], [0, 2], [1, 2]]))
+# print(s.canFinish(3, [[0, 1], [0, 2], [1, 2]]))
+print(s.canFinish(4, [[1, 0], [2, 1], [0, 2], [2, 3]]))
