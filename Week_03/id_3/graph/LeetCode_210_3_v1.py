@@ -9,8 +9,8 @@ BFS
 class Solution:
     def findOrder(self, numCourses, prerequisites):
         queue = []
-        node_list = [[] for i in range(numCourses)]
-        topology_list = [0 for i in range(numCourses)]
+        node_list = [[] for _ in range(numCourses)]
+        topology_list = [0 for _ in range(numCourses)]
 
         for e in prerequisites:
             node_list[e[1]].append(e[0])
@@ -28,7 +28,6 @@ class Solution:
                 topology_list[sn] -= 1
                 if topology_list[sn] == 0:
                     queue.insert(0, sn)
-                    continue
 
         if len(results) != numCourses:
             return []

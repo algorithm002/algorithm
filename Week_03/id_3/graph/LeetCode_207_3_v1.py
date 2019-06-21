@@ -14,8 +14,8 @@ BFS实现
 class Solution:
     def canFinish(self, numCourses, prerequisites):
         queue = []
-        node_list = [[] for i in range(numCourses)]
-        topology_list = [0 for i in range(numCourses)]
+        node_list = [[] for _ in range(numCourses)]
+        topology_list = [0 for _ in range(numCourses)]
 
         for e in prerequisites:
             node_list[e[1]].append(e[0])
