@@ -42,6 +42,33 @@ public class LeetCode_102_18 {
         return result;
     }
 
+    private List<List<Integer>> levels = new ArrayList<>();
+
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        if (root == null) {
+            return levels;
+        }
+
+        dfs(root, 0);
+        return levels;
+    }
+
+    private void dfs(TreeNode node, int level) {
+        if (levels.size() == level) {
+            levels.add(new ArrayList<>());
+        }
+
+        levels.get(level).add(node.val);
+
+        if (node.left != null) {
+            dfs(node.left, level + 1);
+        }
+
+        if (node.right != null) {
+            dfs(node.right, level + 1);
+        }
+    }
+
     private class TreeNode {
         int val;
         TreeNode left;

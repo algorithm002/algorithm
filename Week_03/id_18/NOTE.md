@@ -713,5 +713,39 @@ class Solution {
     }
 }
 ```
+### 解法二
+#### 思路
+使用dfs递归方式，同时通过层级和数组下标的对应，在深度搜索过程中对指定的list里增加节点值
+#### 代码
+```java
+class Solution {
+    private List<List<Integer>> levels = new ArrayList<>();
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) {
+            return levels;
+        }
+
+        dfs(root, 0);
+        return levels;
+    }
+
+    private void dfs(TreeNode node, int level) {
+        if (levels.size() == level) {
+            levels.add(new ArrayList<>());
+        }
+
+        levels.get(level).add(node.val);
+        
+        if (node.left != null) {
+            dfs(node.left, level + 1);
+        }
+        
+        if (node.right != null) {
+            dfs(node.right, level + 1);
+        }
+    }
+}
+```
 ### 收获
 在做这题的时候，真的觉得轻松了很多，思路一下子就有了，刻意练习很有效果。
