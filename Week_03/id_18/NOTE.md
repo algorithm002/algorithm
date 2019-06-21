@@ -652,3 +652,66 @@ class MedianFinder {
   1. 找到瓶颈
   2. 尝试优化的方法
   3. 如果失败，循环往复
+## LeetCode_102
+### 题目
+给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。
+
+例如:
+```
+给定二叉树: [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+返回其层次遍历结果：
+```
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+```
+### 解法一
+#### 思路
+这题和429题很相似，使用bfs方式，使用记录层数节点个数的count变量就可以了。
+#### 代码
+```java
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> nodeLevel = new ArrayList<>();
+
+            while (count-- > 0) {
+                TreeNode node = queue.poll();
+                nodeLevel.add(node.val);
+                
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            
+            result.add(nodeLevel);
+        }
+
+        return result;
+    }
+}
+```
+### 收获
+在做这题的时候，真的觉得轻松了很多，思路一下子就有了，刻意练习很有效果。
