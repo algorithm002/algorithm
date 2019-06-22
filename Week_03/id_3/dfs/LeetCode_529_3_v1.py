@@ -29,7 +29,7 @@ class Solution:
         return board
 
     def dfs(self, board, i, j):
-        if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]):
+        if self.check_out_border(board, i, j):
             return
         v = board[i][j]
         if v != 'E':
@@ -49,11 +49,14 @@ class Solution:
         for _i, _j in DIRECT_LIST:
             __i = i + _i
             __j = j + _j
-            if __i < 0 or __j < 0 or __i >= len(board) or __j >= len(board[0]):
+            if self.check_out_border(board, __i, __j):
                 continue
             if board[__i][__j] == 'M':
                 num += 1
         return num
+
+    def check_out_border(self, board, i, j):
+        return i < 0 or j < 0 or i >= len(board) or j >= len(board[0])
 
 
 def check(board, click, result):
