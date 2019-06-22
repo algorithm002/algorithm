@@ -1,3 +1,7 @@
+"""
+正常广度优先遍历 在插入结果的时候进行反转
+"""
+
 class Solution:
     def zigzagLevelOrder(self, root):
         r = []

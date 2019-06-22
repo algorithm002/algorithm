@@ -1,3 +1,8 @@
+"""
+复杂版本的实现 在插入和迭代的时候就直接有倒序的元素
+"""
+
+
 class Solution:
     def zigzagLevelOrder(self, root):
         r = []
