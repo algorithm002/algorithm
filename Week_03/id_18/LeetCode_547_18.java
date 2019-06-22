@@ -59,13 +59,4 @@ public class LeetCode_547_18 {
             count--;
         }
     }
-
-    public static void main(String[] args) {
-        int[][] M = {{1, 1, 0},
-                {1, 1, 0},
-                {0, 0, 1}};
-        LeetCode_547_18 solution = new LeetCode_547_18();
-        int res = solution.findCircleNum(M);
-        System.out.println(res);
-    }
 }
