@@ -28,3 +28,6 @@ mid = left + (right - left)/2
 ####Java implementation skill
 1. Beside Stack<>, can also use Deque for stack implementation, like ArrayDeque
 1. Use LinkedList<> as queue when needed
+
+####Knowledge mind map
+![Alt text](./data-structure-and-algorithm.png?raw=true "Title")
