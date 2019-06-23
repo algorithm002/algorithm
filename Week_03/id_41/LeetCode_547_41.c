@@ -2,7 +2,7 @@
  * @lc app=leetcode id=547 lang=c
  *
  * [547] Friend Circles
- * T(n) = O(log(MSize))
+ * T(n) = O(MSize)
  * S(n) = O(MSize)
  */
 
