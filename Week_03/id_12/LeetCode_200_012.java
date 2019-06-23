@@ -27,29 +27,29 @@
 
 class Solution {
 
-  int[] x = {1, 0, -1, 0};
-  int[] y = {0, -1, 0, 1};
+	int[] x = {1, 0, -1, 0};
+	int[] y = {0, -1, 0, 1};
 
-  public int numIslands(char[][] grid) {
-    int count = 0;
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid[i].length; j++) {
-        if (grid[i][j] == '1') {
-          count++;
-          sink(grid, i, j);
-        }
-      }
-    }
-    return count;
-  }
+	public int numIslands(char[][] grid) {
+		int count = 0;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (grid[i][j] == '1') {
+					count++;
+					sink(grid, i, j);
+				}
+			}
+		}
+		return count;
+	}
 
-  private void sink(char[][] grid, int i, int j) {
-    if (i < 0 || j < 0 || i > grid.length - 1 || j > grid[i].length - 1 || grid[i][j] == '0') {
-      return;
-    }
-    grid[i][j] = '0';
-    for (int index = 0; index < 4; index++) {
-      sink(grid, i + x[index], j + y[index]);
-    }
-  }
+	private void sink(char[][] grid, int i, int j) {
+		if (i < 0 || j < 0 || i > grid.length - 1 || j > grid[i].length - 1 || grid[i][j] == '0') {
+			return;
+		}
+		grid[i][j] = '0';
+		for (int index = 0; index < 4; index++) {
+			sink(grid, i + x[index], j + y[index]);
+		}
+	}
 }
