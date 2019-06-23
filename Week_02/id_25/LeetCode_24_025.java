@@ -23,7 +23,7 @@ package com.mootal.algo.day8_24;
  * @see Object
  * @since 1.0
  */
-public class SwapNodes24 {
+public class LeetCode_24_025 {
 
   private static class ListNode {
     int val;

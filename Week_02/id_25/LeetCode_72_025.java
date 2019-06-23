@@ -22,7 +22,7 @@ package com.mootal.algo.day9_72;
  * @see Object
  * @since 1.0
  */
-public class EditDistance72 {
+public class LeetCode_72_025 {
 
   public static void main(String[] args) {
 //    String word1 = "abc", word2 = "abc";
