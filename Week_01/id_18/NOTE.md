@@ -875,3 +875,204 @@ class Solution {
 ```
 ### 收获
 先想再做，解题轻松。
+## LeetCode_50_18
+### 题目
+实现 pow(x, n) ，即计算 x 的 n 次幂函数。
+
+示例 1:
+```
+输入: 2.00000, 10
+输出: 1024.00000
+```
+示例 2:
+```
+输入: 2.10000, 3
+输出: 9.26100
+```
+示例 3:
+```
+输入: 2.00000, -2
+输出: 0.25000
+解释: 2-2 = 1/22 = 1/4 = 0.25
+```
+说明:
+```
+-100.0 < x < 100.0
+n 是 32 位有符号整数，其数值范围是 [−231, 231 − 1] 。
+```
+### 思路
+第一步想到的还是递归以及4个模板单词
+1. 想好退出条件
+2. 不断的递归乘以之前返回的值
+3. 因为是y*=y，所以递归的时候需要直接n/2
+### 解法一
+```java
+class Solution {
+    public double myPow(double x, int n) {
+         if (n == 0) {
+            return 1;
+        }
+
+        if (n == 1) {
+            return x;
+        }
+
+        if (n == Integer.MIN_VALUE){
+            return 1.0 / myPow(x, -(n/2));
+        }
+
+        if (n < 0) {
+            return 1.0 / myPow(x, -n);
+        }
+
+
+        double y = myPow(x, n / 2);
+        y *= y;
+
+        return n % 2 == 1 ? y * x : y;
+    }
+}
+```
+解这道题目时，难点主要是在退出条件中：
+1. 为0的时候返回1
+2. 为1的时候返回本身
+3. 如果时负数，需要算-n的倒数
+4. 但是，如果是int的最小值，-n会导致int类型永远是最小值，进而导致栈溢出，需要先二分
+### 收获
+主要是提交的过程中，碰到各种解题时没有想到的特殊情况，也就是问题的界限没有确定好，需要在运行的时候不断地试错。
+## LeetCode_101_18
+### 题目
+给定一个二叉树，检查它是否是镜像对称的。
+
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+```
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+```
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+```
+    1
+   / \
+  2   2
+   \   \
+   3    3
+```
+### 思路
+镜像代表：
+1. 左子树的左子树等于右子树的右子树
+2. 左子树的右子树等于右子树的左子树
+3. 根节点相同
+### 解法一
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return doCheck(root, root);
+    }
+    
+    private boolean doCheck(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        
+        if (left == null  || right == null) {
+            return false;
+        }
+        
+        return (left.val == right.val) && doCheck(left.left, right.right) && doCheck(left.right, right.left);
+    }
+}
+``` 
+### 解法二
+#### 思路
+思路和解法一的递归类似，使用近似BFS的方式来解
+#### 代码
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(root);
+        
+        while (!queue.isEmpty()) {
+            TreeNode left = queue.poll();
+            TreeNode right = queue.poll();
+            
+            if (left == null && right == null) {
+                continue;
+            }
+            
+            if (left == null || right == null) {
+                return false;
+            }
+            
+            if (left.val != right.val) {
+                return false;
+            }
+            
+            queue.add(left.left);
+            queue.add(right.right);
+            queue.add(left.right);
+            queue.add(right.left);
+        }
+        return true;
+    }
+}
+```
+### 解法三
+#### 思路
+和解法一一样的思路，使用stack实现，但是看网上说这个算dfs，我觉得不是啊。。。
+#### 代码
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        stack.push(root);
+        
+        while (!stack.isEmpty()) {
+            TreeNode left = stack.pop();
+            TreeNode right = stack.pop();
+            
+            if (left == null && right == null) {
+                continue;
+            }
+            
+            if (left == null || right == null) {
+                return false;
+            }
+            
+            if (left.val != right.val) {
+                return false;
+            }
+            
+            stack.push(left.left);
+            stack.push(right.right);
+            stack.push(left.right);
+            stack.push(right.left);
+        }
+        return true;
+    }
+}
+```
+### 收获
+对于BFS的用法有了进一步的理解和熟悉。
+## LeetCode_84_18
+### 题目
+给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
+
+求在该柱状图中，能够勾勒出来的矩形的最大面积。
+### 解法一
+#### 思路
+1. 使用一个栈来记录遍历数组时候记录到的相对高的方块
+2. 如果遇到比上一个低的方块，就把上一个出栈
+3. 它是整个栈加上遍历到的这个元素中最高的一个
+4. 使用这个方块的高度能够得到最大面积，就要乘上遍历到的位置减去栈顶那个方块的位置。
+5. 因为出栈的这个方块比已经出栈的都矮，但比栈中和遍历到的方块都高，所以从栈顶到遍历到的位置的宽度上，都可以放得下出栈的这个方块的大小
+6. 然后就一直出栈，直到比遍历到的这个方块矮为止。
+7. 继续遍历，循环往复。
+#### 代码
+
+### 收获
