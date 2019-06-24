@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <style>
+        /*table,table tr th, table tr td { border:1px solid #0094ff; }*/
+        /*table { width: 200px; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}*/
+        table {
+            height: 200px;
+            width: 1600px;
+            border: 2px solid forestgreen;
+        }
+
+        th {
+            background: cornflowerblue;
+            border: 1px solid;
+        }
+
+        td {
+            border: 1px solid;
+        }
+
+        tr:nth-child(2n) {
+            /*background: #00CCCC;*/
+        }
+
+        tr td:nth-child(1) {
+            /*background: #FFCCCC;*/
+        }
+
+        .job {
+            background: #FFCCCC;
+        }
+    </style>
+</head>
+<body>
+<table id="table">
+    <!--<thead>-->
+    <!--<tr class="center">-->
+    <!--<th class="col-xs-3 center">名称</th>-->
+    <!--<th class="col-xs-3 center">创建时间</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody id="tbody">-->
+    <!--<tr class="center">-->
+    <!--<td class="col-xs-3 center">1</td>-->
+    <!--<td class="col-xs-3 center">2</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+</table>
+<script>
+    $(function () {
+        // test
+        getfib().forEach(function (val, index) {
+            console.log(val, index);
+        });
+
+        schedule(31);
+    });
+
+    function schedule(days) {
+        var fib = getfib();
+        var matrix = new Array(); // 先声明一维
+        for (var i = 0; i < days; i++) { // 一维长度
+            matrix[i] = new Array(); // 再声明二维
+            for (var j = 0; j < days; j++) { // 二维长度
+                var practice = contains(fib, j - i + 1);
+                matrix[i][j] = practice ? 1 : 0;
+            }
+        }
+        var $table = $("#table");
+        var $tr = $("<tr></tr>");
+        var $th = $("<th>题目</th>");
+        $tr.append($th);
+        for (var i = 0; i < days; i++) {
+            // var title = i < 9 ? "0" + (i + 1) : (i + 1);
+            var title = "<input value='number'/>";
+            var $th = $("<th>" + title + "</th>");
+            $tr.append($th);
+        }
+        $table.append($tr);
+        for (var i = 0; i < days; i++) {
+            var $table = $("#table");
+            var $tr = $("<tr></tr>");
+            var $th = $("<th>第" + (i + 1) + "天</th>");
+            $tr.append($th);
+            for (var j = 0; j < days; j++) {
+                // var val = matrix[j][i] === 0 ? 0 : j === 0 ? 1 : j;
+                var val = matrix[j][i] === 0 ? 0 : j === 0 ? 1 : j;
+                var htmlClass = val !== 0 ? "class='job'" : "";
+                var id = "i" + i + "j" + j;
+                var input = val !== 0 ? "<input type='checkbox' onclick='check(" + id + ")'/>" : matrix[j][i];
+                // var $td = $("<td style='color: deepskyblue;' " + htmlClass + ">" + matrix[j][i] + "</td>");
+                var $td = $("<td id='" + id + "' style='color: deepskyblue;' " + htmlClass + ">" + input + "</td>");
+                $tr.append($td);
+            }
+            $table.append($tr);
+        }
+    }
+
+    function contains(set, value) {
+        return set.has(value);
+    }
+
+    function getfib() {
+        var res = new Set();
+        var n = 0;
+        var calc = 0;
+        while (calc < 30) {
+            calc = helper(n++);
+            res.add(calc);
+        }
+        return res;
+    }
+
+    function helper(n) {
+        if (n === 0) {
+            return 1;
+        }
+        if (n < 4) {
+            return n;
+        }
+        return helper(n - 1) + helper(n - 2);
+    }
+
+    function check(id) {
+        console.log(id);
+        var style = id.getAttribute('style');
+        if (style === 'background:forestgreen;') {
+            id.setAttribute('style', 'background:#FFCCCC;');
+        } else {
+            id.setAttribute('style', 'background:forestgreen;');
+        }
+    }
+
+</script>
+</body>
+</html>
