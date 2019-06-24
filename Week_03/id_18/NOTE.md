@@ -901,3 +901,99 @@ class Solution {
 ```
 ### 收获
 熟悉和练习了并查集的解法，同时了解了如何进行路径压缩。
+## LeetCode_310
+### 题目
+对于一个具有树特征的无向图，我们可选择任何一个节点作为根。图因此可以成为树，在所有可能的树中，具有最小高度的树被称为最小高度树。给出这样的一个图，写出一个函数找到所有的最小高度树并返回他们的根节点。
+
+格式
+
+该图包含 n 个节点，标记为 0 到 n - 1。给定数字 n 和一个无向边 edges 列表（每一个边都是一对标签）。
+
+你可以假设没有重复的边会出现在 edges 中。由于所有的边都是无向边， [0, 1]和 [1, 0] 是相同的，因此不会同时出现在 edges 里。
+
+示例 1:
+```
+输入: n = 4, edges = [[1, 0], [1, 2], [1, 3]]
+
+        0
+        |
+        1
+       / \
+      2   3 
+
+输出: [1]
+```
+示例 2:
+```
+输入: n = 6, edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
+
+     0  1  2
+      \ | /
+        3
+        |
+        4
+        |
+        5 
+
+输出: [3, 4]
+```
+说明:
+```
+ 根据树的定义，树是一个无向图，其中任何两个顶点只通过一条路径连接。 换句话说，一个任何没有简单环路的连通图都是一棵树。
+树的高度是指根节点和叶子节点之间最长向下路径上边的数量。
+```
+### 解法一
+#### 思路
+参考了国际站的解法，使用bfs拓扑排序，也就是每一次将叶子节点找到并从这个无向图中去掉，循环往复，一层层的摘掉这些叶子，直到找到最后1个或2个节点。
+1. 用一个**List<Set<Integer>> list**维护edges中每个节点与其他与之直接关联的节点们的关系(从我这个节点出发，走一步就到的节点)
+2. 用一个**List<Integer> leaves**来保存当前要摘的这层叶子节点们
+3. 如果当前节点只有一个与之直接关联的节点，说明它就是要摘的叶子，把他放到leaves里(bfs起始的一层)
+4. 然后开始bfs,条件是while(n > 2)，只要摘到小于等于2的时候，就说明摘完了
+5. 通过遍历leaves，在循环体里：
+   1. 摘叶子
+   2. 放下一层要摘的叶子
+6. 留到最后的叶子节点就是结果
+#### 代码
+```java
+class Solution {
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        if (n == 1) {
+            return Collections.singletonList(0);
+        }
+
+        List<Set<Integer>> list = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            list.add(new HashSet<>());
+        }
+        for (int[] edge: edges) {
+            list.get(edge[0]).add(edge[1]);
+            list.get(edge[1]).add(edge[0]);
+        }
+
+        List<Integer> leaves = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (list.get(i).size() == 1) {
+                leaves.add(i);
+            }
+        }
+
+        while (n > 2) {
+            n -= leaves.size();
+
+            List<Integer> newLeaves = new ArrayList<>();
+            for (int leave: leaves) {
+                int node = list.get(leave).iterator().next();
+                list.get(node).remove(leave);
+                if (list.get(node).size() == 1) {
+                    newLeaves.add(node);
+                }
+            }
+            leaves = newLeaves;
+        }
+        
+        return leaves;
+    }
+}
+```
+### 收获
+了解和练习了bfs拓扑排序
