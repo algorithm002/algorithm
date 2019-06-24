@@ -3,6 +3,9 @@ class Solution(object):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
+        思路：
+        1) 防止重复结果，所以先排序，遍历时跳过相邻的重复值
+        2) 二分查找，大于0则右测向左移动，小于0则左边向右移动
         """
         nums.sort()
         ret, n = [], len(nums)
