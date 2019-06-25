@@ -203,6 +203,48 @@ class Solution {
 ```
 ### 解法三
 #### 思路
-
+使用分治算法：
+1. 不断切分整个数组，直到数组长度为1
+2. 切下的左右两个子区间，去求它们的众数
+   - 如果众数是一样的，那么就返回这个数
+   - 如果众数不同，谁众数的数量多，那个就是众数，返回
+3. 回溯到最后，返回那个值
 #### 代码
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        return divideConquer(nums, 0, nums.length - 1);
+    }
+
+    private int divideConquer(int[] nums, int left, int right) {
+        if (left == right) {
+            return nums[left];
+        }
+
+        int mid = (right - left) / 2 + left;
+        int leftMajorityNum = divideConquer(nums, left, mid);
+        int rightMajorityNum = divideConquer(nums, mid + 1, right);
+
+        if (leftMajorityNum == rightMajorityNum) {
+            return leftMajorityNum;
+        }
+
+        long leftCount = count(nums, leftMajorityNum, left, mid);
+        long rightCount = count(nums, rightMajorityNum, mid + 1, right);
+
+        return leftCount > rightCount ? leftMajorityNum : rightMajorityNum;
+    }
+
+    private int count(int[] nums, int num,  int left, int right) {
+        int count = 0;
+        for (int i = left; i <= right; i++) {
+            if (nums[i] == num) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+```
 ### 收获
+熟悉和练习了分治算法
