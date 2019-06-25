@@ -1,6 +1,4 @@
-package lowestCommonAncestor236;
-
-public class Solution {
+public class LeetCode_236_28 {
     private TreeNode ret=null;
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {

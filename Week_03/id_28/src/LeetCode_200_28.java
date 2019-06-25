@@ -34,7 +34,7 @@ public class Solution {
         //char[][] grid={{'1','1','1'},{'0','1','0'},{'1','1','1'}};
         char[][] grid={{'1','0','1','1','1'},{'1','0','1','0','1'},{'1','1','1','0','1'}};
         /*
-        new Solution().dfs(0,0,grid);
+        new LeetCode_174_28().dfs(0,0,grid);
         for (int i=0;i<grid.length;i++){
             for (int j=0;j<grid[0].length;j++){
                 System.out.print(grid[i][j]);

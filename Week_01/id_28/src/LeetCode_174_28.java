@@ -1,6 +1,4 @@
-package dungeonGame174;
-
-public class Solution {
+public class LeetCode_174_28 {
     Integer[][] cache;
     public int calculateMinimumHP(int[][] dungeon) {
 

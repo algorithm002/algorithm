@@ -1,6 +1,4 @@
-package validateBST98;
-
-public class Solution {
+public class LeetCode_98_28 {
     TreeNode prev;
     public boolean isValidBST(TreeNode root) {
         return inOrderVisit(root);

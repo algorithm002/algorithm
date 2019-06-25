@@ -1,5 +1,3 @@
-package lowestCommonAncestor236;
-
 public class TreeNode {
     int val;
     TreeNode left;

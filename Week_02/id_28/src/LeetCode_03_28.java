@@ -1,9 +1,7 @@
-package longestSubstring03;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
+public class LeetCode_03_28 {
     public int lengthOfLongestSubstring(String s) {
         int first=0;
         int last;
