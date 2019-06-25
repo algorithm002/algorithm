@@ -152,3 +152,57 @@ class Solution {
 ```
 ### 收获
 熟悉和练习了字典树结构及使用的解法。
+## LeetCode_169_求众数
+### 题目
+给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在众数。
+
+示例 1:
+```
+输入: [3,2,3]
+输出: 3
+```
+示例 2:
+```
+输入: [2,2,1,1,1,2,2]
+输出: 2
+```
+### 解法一
+#### 思路
+暴力解法，直接用哈希表统计num的个数，当超过n/2的时候就返回。
+时间复杂度：O(N)，最坏情况遍历整个数组
+空间复杂度：O(N)，最坏情况保存n/2个元素
+#### 代码
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer, Long> map = new HashMap<>();
+        int len = nums.length / 2;
+        for (Integer num: nums) {
+            map.compute(num, (k, v) -> v == null ? 1 : ++v);
+            if (map.get(num) > len) {
+                return num;
+            }
+        }
+        return 0;
+    }
+}
+```
+### 解法二
+#### 思路
+对数组排序，因为众数的定义是大于n/2个，所以在对数组排序后，下标n/2对应的元素一定是众数
+#### 代码
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+}
+```
+### 解法三
+#### 思路
+
+#### 代码
+### 收获
