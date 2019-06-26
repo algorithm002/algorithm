@@ -315,8 +315,31 @@ class Solution {
     }
 }
 ```
-### 解法二
-#### 思路
+#### 代码优化
+```java
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
 
-#### 代码
+        int gi = 0, si = 0, gl = g.length, sl = s.length;
+
+        while (gi < gl && si < sl) {
+            if (g[gi] <= s[si]) {
+                gi++;
+            }
+
+            si++;
+        }
+        return gi;
+    }
+}
+```
+- 直接移动两个下标，循环时任意一个越界就停止。
+- 孩子胃口的下标移动条件是满足饼干满足，同时移动的下标也代表了有多少个孩子吃饱了
+- 无论是否满足要求，都移动饼干下标，要么吃掉了，要么遗弃了
+
+时间复杂度：O(NlogN)，孩子胃口N，饼干logN
+空间复杂度：O(1)
 ### 收获
+熟悉和练习的贪心算法，在简化代码过程中也得到了学习

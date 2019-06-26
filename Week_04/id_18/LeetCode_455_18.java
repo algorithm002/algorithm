@@ -28,4 +28,20 @@ public class LeetCode_455_18 {
 
         return count;
     }
+
+    public int findContentChildren1(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int gi = 0, si = 0, gl = g.length, sl = s.length;
+
+        while (gi < gl && si < sl) {
+            if (g[gi] <= s[si]) {
+                gi++;
+            }
+
+            si++;
+        }
+        return gi;
+    }
 }
