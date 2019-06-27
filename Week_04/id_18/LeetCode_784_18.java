@@ -30,4 +30,31 @@ public class LeetCode_784_18 {
             dfs(sb, index + 1);
         }
     }
+
+    public List<String> letterCasePermutation1(String S) {
+        dfs(S.toCharArray(), 0);
+        return list;
+    }
+
+    private void dfs(char[] cs, int index) {
+        if (index == cs.length) {
+            list.add(new String(cs));
+            return;
+        }
+
+        if (cs[index] < 'A') {
+            dfs(cs, index + 1);
+        } else {
+            char c = cs[index];
+            if (c > 64 && c < 91) {
+                dfs(cs, index + 1);
+                cs[index] = (char) (cs[index] + 'a' - 'A');
+                dfs(cs, index + 1);
+            } else {
+                dfs(cs, index + 1);
+                cs[index] = (char) (cs[index] + 'A' - 'a');
+                dfs(cs, index + 1);
+            }
+        }
+    }
 }

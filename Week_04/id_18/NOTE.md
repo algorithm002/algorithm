@@ -404,5 +404,40 @@ class Solution {
     }
 }
 ```
+#### 优化代码
+参考了国内站的另一种回溯解法，其中讨论了为什么在步骤类似的情况下，这种算法的时间会更短，他的结论是在做判断字符是否为数字的动作时，直接使用ASCII码进行比较比**Character.isDigit**方法更快。
+
+我也进行了尝试。而我的另一个不同是，我使用的是StringBuilder对象，而其使用的是字符数组。在使用优化的方法后，代码的执行时间果然减少了，同时空间占用的大小也减小了，原因应该是StringBuilder类型的对象中还维护了一些题目中不需要的属性。
+```java
+class Solution {
+    List<String> list = new ArrayList<>();
+    public List<String> letterCasePermutation(String S) {
+        dfs(S.toCharArray(), 0);
+        return list;
+    }
+
+    private void dfs(char[] cs, int index) {
+        if (index == cs.length) {
+            list.add(new String(cs));
+            return;
+        }
+
+        if (cs[index] < 'A') {
+            dfs(cs, index + 1);
+        } else {
+            char c = cs[index];
+            if (c > 64 && c < 91) {
+                dfs(cs, index + 1);
+                cs[index] = (char) (cs[index] + 'a' - 'A');
+                dfs(cs, index + 1);
+            } else {
+                dfs(cs, index + 1);
+                cs[index] = (char) (cs[index] + 'A' - 'a');
+                dfs(cs, index + 1);
+            }
+        }
+    }
+}
+```
 ### 收获
 熟悉和练习了回溯算法
