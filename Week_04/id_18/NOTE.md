@@ -343,3 +343,66 @@ class Solution {
 空间复杂度：O(1)
 ### 收获
 熟悉和练习的贪心算法，在简化代码过程中也得到了学习
+## LeetCode_784_字母大小写全排列
+### 题目
+给定一个字符串S，通过将字符串S中的每个字母转变大小写，我们可以获得一个新的字符串。返回所有可能得到的字符串集合。
+
+示例:
+```
+输入: S = "a1b2"
+输出: ["a1b2", "a1B2", "A1b2", "A1B2"]
+```
+```
+输入: S = "3z4"
+输出: ["3z4", "3Z4"]
+```
+```
+输入: S = "12345"
+输出: ["12345"]
+```
+注意：
+```
+S 的长度不超过12。
+S 仅由数字和字母组成。
+```
+### 解法一
+#### 思路
+使用回溯算法进行搜索
+1. 定义一个函数进行回溯，需要如下两个参数
+   - 被遍历的字符串(补充：因String对象为final修饰的不可变类型，所以每次修改字符串会额外创建一个新的String对象，改为使用StringBuilder对象)
+   - 当前层需处理的字符下标
+2. 类似递归，以字符下标作为层数，一层层的下钻处理逻辑
+3. 处理内容是：
+   - 当前要处理的字符是数字就继续下钻
+   - 否则就分别改变当前字符为大小写，分别下钻。
+4. 当字符串被搜索完毕，就将字符串放入一个list中，同时回溯
+5. 整个过程结束后，将list返回
+#### 代码
+```java
+class Solution {
+    List<String> list = new ArrayList<>();
+    public List<String> letterCasePermutation(String S) {
+        dfs(new StringBuilder(S), 0);
+        return list;
+    }
+
+    private void dfs(StringBuilder sb, int index) {
+        if (index == sb.length()) {
+            list.add(sb.toString());
+            return;
+        }
+
+        if (Character.isDigit(sb.charAt(index))) {
+            dfs(sb, index + 1);
+        } else {
+            char c = sb.charAt(index);
+            sb.setCharAt(index, Character.toLowerCase(c));
+            dfs(sb, index + 1);
+            sb.setCharAt(index, Character.toUpperCase(c));
+            dfs(sb, index + 1);
+        }
+    }
+}
+```
+### 收获
+熟悉和练习了回溯算法
