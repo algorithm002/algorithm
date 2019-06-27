@@ -441,3 +441,45 @@ class Solution {
 ```
 ### 收获
 熟悉和练习了回溯算法
+## LeetCode_70_爬楼梯
+### 题目
+
+### 失败解法
+#### 思路
+使用递归的方法，和之前做的一个求斐波那契数列的题目类似，代码和思路都很直观、简单，但超时了。
+时间复杂度：O(2^n)
+#### 代码
+```java
+class Solution {
+    public int climbStairs(int n) {
+        return n <= 2 ? n : climbStairs(n - 1) + climbStairs(n - 2);
+    }
+}
+```
+### 解法一
+#### 思路
+求助国内站的官方解法二，其对解法一(思路和我的失败解法类似)进行了优化，用到了记忆化递归。因为每次下钻的过程中，会有重复的步数，把已经计算过的部署放在数组里记录，就可以省去很多的步骤。
+#### 代码
+```java
+class Solution {
+    public int climbStairs(int n) {
+        return climbStairs(n, new int[n + 1]);
+    }
+    
+    private int climbStairs(int n, int[] nums) {
+        if (n <= 2) {
+            return n;
+        }
+
+        if (nums[n] > 0) {
+            return nums[n];
+        }
+
+        int num = climbStairs(n - 1, nums) + climbStairs(n - 2, nums);
+        nums[n] = num;
+        
+        return num;
+    }
+}
+```
+### 收获
