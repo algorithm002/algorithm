@@ -506,4 +506,77 @@ class Solution {
     }
 }
 ```
+### 解法二
+#### 思路
+看了国内站官方解法三对于动态规划解法的讲解，发现其思路和我解法一二的思路有部分是基本一致的：**dp[i] = dp[i - 1] + dp[i - 2]**。
+
+从覃老师周三一开始对动态规划的讲解中了解到，这题是属于一维的动态规划的，使用一维数组dp[]
+- 数组下标对应的是台阶数
+- 下标对应的元素代表的是走当前台阶数有的解法
+
+因为题目定义每次只能是1或者2步，所以到达当前台阶i的必由路径一定是
+- i - 1级台阶直接走1级
+- i - 2级台阶直接走2级
+
+于是到达i级台阶的方法数dp[i]就是dp[i - 1] + dp[i - 2]，也就是从第3级开始，每一级的结果就是前一两级结果之和。
+- 时间复杂度：O(N)
+- 空间复杂度：O(N)
+#### 代码
+```java
+class Solution {
+    public int climbStairs(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+}
+```
+#### 优化代码
+在写如上代码时发现，其实整个过程主要出现的就是三个变量
+- 当前的数
+- 前一位的数
+- 前二位的数
+
+所以不需要使用一个n+1位的数组来保存当前值，只需要3个变量就可以了。于是对解法二的代码进行了优化
+```java
+class Solution {
+    public int climbStairs(int n) {
+        if (n <= 2) {
+            return n;
+        }
+
+        int first = 1, second = 2;
+        for (int i = 3; i <= n; i++) {
+            int third = first + second;
+            first = second;
+            second = third;
+        }
+        
+        return second;
+    }
+}
+```
+但执行结果显示，空间没有减少，没办法解释，希望有人解惑。
+### 解法三
+#### 思路
+使用数学公式解，真的快。
+#### 代码
+```java
+class Solution {
+    public int climbStairs(int n) {
+        double sqrt5=Math.sqrt(5);
+        double fibn=Math.pow((1+sqrt5)/2,n+1)-Math.pow((1-sqrt5)/2,n+1);
+        return (int)(fibn/sqrt5);
+    }
+}
+```
 ### 收获
+练习和熟悉了动态规划及递归，还学了点数学。
