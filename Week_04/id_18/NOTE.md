@@ -580,3 +580,114 @@ class Solution {
 ```
 ### 收获
 练习和熟悉了动态规划及递归，还学了点数学。
+## LeetCode_208_实现Trie(前缀树)
+### 题目
+
+### 解法
+#### 思路
+和720题构建Trie树的思路基本一致。
+#### 代码
+```java
+class Trie {
+    private static final int SIZE = 26;
+    private TrieNode root;
+
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    public void insert(String word) {
+        if (isEmpty(word)) {
+            return;
+        }
+
+        char[] cs = word.toCharArray();
+        TrieNode node = root;
+        for (char c: cs) {
+            int index = c - 'a';
+            if (node.next[index] == null) {
+                node.next[index] = new TrieNode();
+                node.next[index].data = c;
+            }
+            node = node.next[index];
+        }
+        node.isWord = true;
+    }
+
+    public boolean search(String word) {
+        if (isEmpty(word)) {
+            return false;
+        }
+
+        char[] cs = word.toCharArray();
+        TrieNode node = root;
+        for (char c: cs) {
+            int index = c - 'a';
+            if (node.next[index] != null) {
+                node = node.next[index];
+            } else {
+                return false;
+            }
+        }
+
+        return node.isWord;
+    }
+
+    public boolean startsWith(String prefix) {
+        if (isEmpty(prefix)) {
+            return false;
+        }
+
+        TrieNode node = root;
+        char[] cs = prefix.toCharArray();
+        for (char c: cs) {
+            int index = c - 'a';
+            if (node.next[index] != null) {
+                node = node.next[index];
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isEmpty(String word) {
+        return word == null || word.length() == 0;
+    }
+
+    private class TrieNode {
+        private char data;
+        private TrieNode[] next;
+        private boolean isWord;
+
+        TrieNode() {
+            this.next = new TrieNode[SIZE];
+            this.isWord = false;
+        }
+    }
+}
+```
+### 收获
+再次熟悉了Trie树的构建代码。同时在构建过程中，发现startWith和search有一部分代码是重复的，在想要抽出这部分代码复用的过程中，没有考虑到函数中的引用指针的问题。
+```java
+class Problem {
+    boolean search(String word) {
+        TrieNode node = root;
+        boolean hasStr = hasStr(word, node);
+        return hasStr ? node.isWord : hasStr;
+    }
+    
+    private boolean hasStr(String word, TrieNode node) {
+        for (char c: word.toCharArray()) {
+            //......
+            if (node.next[index] == null) {
+                return false;
+            }
+            node = node.next[index];
+        }
+        return true;
+    }
+}
+```
+这里的node其实还是指向的root。最后只能老实的继续在两个函数中写类似的代码。
