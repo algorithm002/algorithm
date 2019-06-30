@@ -71,7 +71,6 @@ public class LeetCode_200_025 {
         if (grid[i][j] == '0' || visited[i][j])
           continue;
         ++res;
-//        dfs(grid, visited, i, j);
         LinkedList<Integer> q = new LinkedList<>();
         q.push(i * n + j);
         bfs(q, grid, visited, m, n, dx, dy);
