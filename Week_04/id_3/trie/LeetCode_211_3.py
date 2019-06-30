@@ -23,8 +23,7 @@ class WordDictionary:
 
             if c == '.':
                 for sn in node.edges.values():
-                    sr = self._dfs(sn, word[i+1:])
-                    if sr:
+                    if self._dfs(sn, word[i+1:]):
                         return True
                 return False
 
