@@ -5,7 +5,7 @@
  */
 using System;
 
-public class Solution {
+public class Solution3 {
     // 解法1：就是先排序，后暴力查找，计数，最后返回计数结果
     public int FindContentChildren (int[] g, int[] s) {
         Array.Sort (g);

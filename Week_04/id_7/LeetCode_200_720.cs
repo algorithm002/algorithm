@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 
-public class Solution {
+public class Solution1 {
     // 方法1
     // 先排序，后将所有单词放入集合中，遍历每一个单词，
     // 然后对于每个单词进行每次去除末尾一个字母的循环操作，

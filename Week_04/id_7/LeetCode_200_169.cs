@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 
-public class Solution {
+public class Solution2 {
     // 解法1
     // 暴力法，直接双层循环遍历所有数字，统计出现次数，大于nums.Length/2就直接返回
     // 优化点：记录之前统计过的数字，再次遇到，则不再统计
