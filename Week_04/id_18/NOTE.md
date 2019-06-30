@@ -582,7 +582,24 @@ class Solution {
 练习和熟悉了动态规划及递归，还学了点数学。
 ## LeetCode_208_实现Trie(前缀树)
 ### 题目
+实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 
+示例:
+```
+Trie trie = new Trie();
+
+trie.insert("apple");
+trie.search("apple");   // 返回 true
+trie.search("app");     // 返回 false
+trie.startsWith("app"); // 返回 true
+trie.insert("app");   
+trie.search("app");     // 返回 true
+```
+说明:
+```
+你可以假设所有的输入都是由小写字母 a-z 构成的。
+保证所有输入均为非空字符串。
+```
 ### 解法
 #### 思路
 和720题构建Trie树的思路基本一致。
@@ -691,3 +708,60 @@ class Problem {
 }
 ```
 这里的node其实还是指向的root。最后只能老实的继续在两个函数中写类似的代码。
+## LeetCode_53_最大子序和
+### 题目
+给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+示例:
+```
+输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+```
+进阶:
+```
+如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。
+```
+### 解法一
+#### 思路
+因为题目求的是子序列的最大和，在求和的过程中，可以定义两个变量：
+- 最终的结果result
+- 求和过程中临时的和sum
+
+对于result来说，它不用管sum是通过多少个元素相加得来的，它只需要管这个sum对自身是有益还是无益的，而有益无益的定义也很简单，是否大于等于0。
+
+所以整个过程：
+- 定义一个变量记录结果
+- 定义一个变量记录求和过程中临时的和
+- 迭代数组，在迭代过程中判断sum>=0
+   - 如果是：result就接受这个sum，result += sum
+   - 如果不是：result就舍弃这个sum，sum的累加从当前num重新开始
+- 在循环体里，对result和sum进行大小判断
+   - result大，不变
+   - sum大，result = sum
+- 迭代结束，返回result
+#### 代码
+```java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int result = nums[0];
+        int sum = 0;
+        for (int num: nums) {
+            if (sum >= 0) {
+                sum += num;
+            } else {
+                sum = num;
+            }
+            result = Math.max(sum, result);
+        }
+        
+        return result;
+    }
+}
+```
+### 解法二
+#### 思路
+
+#### 代码
+
+### 收获
