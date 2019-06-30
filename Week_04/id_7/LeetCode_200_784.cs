@@ -5,7 +5,7 @@
  */
 using System.Collections.Generic;
 
-public class Solution {
+public class Solution4 {
     // 方法1：BFS 不是自己想出来的，从国际版上讨论区学习到的
     // public IList<string> LetterCasePermutation (string S) {
     //     if (S == null) {
