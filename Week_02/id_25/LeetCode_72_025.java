@@ -25,8 +25,6 @@ package com.mootal.algo.day9_72;
 public class LeetCode_72_025 {
 
   public static void main(String[] args) {
-//    String word1 = "abc", word2 = "abc";
-//    String word1 = "horse", word2 = "rose";
     String word1 = "rose", word2 = "horse";
     System.out.println(minDistance(word1, word2));
     System.out.println(minDistanceDP(word1, word2));
@@ -34,13 +32,6 @@ public class LeetCode_72_025 {
 
   /**
    * 递归解法 <p>
-   * 自己思考结合题解提示，主干思路：<p>
-   * &nbsp;&nbsp;1.先过一遍所有可能的解决方案 找到递归思路 2 用mem优化<p>
-   * 自己学习 思考 实践时的难点(难点是如何突破的见wiki)：<p>
-   * &nbsp;&nbsp;1 看题解思路 自己尝试实现代码 写出相似度50% 再看答案
-   * &nbsp;&nbsp;2 边界条件处理
-   * &nbsp;&nbsp;3 多种路径组合出正确的递归写法
-   * &nbsp;&nbsp;4 如何合并到最终结果<p>
    *
    * @param word1
    * @param word2
@@ -51,53 +42,26 @@ public class LeetCode_72_025 {
     char[] w2 = word2.toCharArray();
     int l1 = w1.length, l2 = w2.length;
     int[][] mem = new int[l1][l2];
-//    return help(0, w1, 0, w2, mem);
     return helpWithMem(0, w1, 0, w2, mem);
   }
 
   private static int help(int i, char[] w1, int j, char[] w2, int[][] mem) {
     int insertCnt, deleteCnt, replaceCnt;
     if (i == w1.length) {
-      // 长短不一致的情况 例如 rose -> horse
-      // 这里自己实现起来很困难 很难想到
       return w2.length - j;
     }
     if (j == w2.length) {
-      // 长短不一致的情况 例如 horse -> rose
-      // 这里自己实现起来很困难 很难想到
       return w1.length - i;
     }
     int res = 0;
     if (w1[i] == w2[j]) {
-      // 直接return
-//      System.out.println("i=" + i);
       res = help(i + 1, w1, j + 1, w2, mem);
-//      System.out.println("i=" + i);
       return res;
     } else {
       deleteCnt = help(i + 1, w1, j, w2, mem);
-      System.out.println(deleteCnt);
       insertCnt = help(i, w1, j + 1, w2, mem);
-      System.out.println(insertCnt);
       replaceCnt = help(i + 1, w1, j + 1, w2, mem);
-      System.out.println(replaceCnt);
-      // 这里很难想到是取三者的最小值，还要加1是什么意思
       res = Math.min(insertCnt, Math.min(deleteCnt, replaceCnt)) + 1;
-      // 自己写的代码 意思接近了
-//      if  (w1[i + 1] == w2[j]) {
-//        i = i + 1;
-//        help(i + 1, w1, j, w2);
-//        deleteCnt++;
-//      } else if (w1[i] == w2[j + 1]) {
-//        j = j + 1;
-//        help(i, w1, j, w2);
-//        insertCnt++;
-//      } else {
-//        i = i + 1;
-//        j = j + 1;
-//        help(i, w1, j, w2);
-//        replaceCnt++;
-//      }
     }
     return res;
   }
@@ -115,17 +79,12 @@ public class LeetCode_72_025 {
     }
     int res = 0;
     if (w1[i] == w2[j]) {
-//      System.out.println("i=" + i);
       res = helpWithMem(i + 1, w1, j + 1, w2, mem);
-//      System.out.println("i=" + i);
       return res;
     } else {
       deleteCnt = helpWithMem(i + 1, w1, j, w2, mem);
-//      System.out.println(deleteCnt);
       insertCnt = helpWithMem(i, w1, j + 1, w2, mem);
-//      System.out.println(insertCnt);
       replaceCnt = helpWithMem(i + 1, w1, j + 1, w2, mem);
-//      System.out.println(replaceCnt);
       mem[i][j] = Math.min(insertCnt, Math.min(deleteCnt, replaceCnt)) + 1;
     }
     return mem[i][j];
@@ -133,20 +92,6 @@ public class LeetCode_72_025 {
 
   /**
    * DP解法 <p>
-   * 看题解，主干思路：<p>
-   * &nbsp;&nbsp; dp[i][j] 表示从 word1 的前i个字符转换到 word2 的前j个字符所需要的步骤<p>
-   * 自己学习 思考 实践时的难点(难点是如何突破的见wiki)：<p>
-   * &nbsp;&nbsp;找出状态转移方程 思路：手写例子 简化变量
-   * DP特点
-   * 1 求极值
-   * 2 子问题最优解
-   * 3 dp和递归不同的是 dp是循环 递归是栈
-   * 4 dp倾向于倒序<p>
-   * . Ø a b c d<p>
-   * Ø 0 1 2 3 4<p>
-   * b 1 1 1 2 3<p>
-   * b 2 2 1 2 3<p>
-   * c 3 3 2 1 2<p>
    *
    * @param word1
    * @param word2
