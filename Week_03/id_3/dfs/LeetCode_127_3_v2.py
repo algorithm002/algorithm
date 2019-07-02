@@ -22,9 +22,7 @@ class Solution:
         begin_queue = [begin]
         end_queue = [end]
 
-        while True:
-            if not begin_queue and not end_queue:
-                return 0
+        while begin_queue or end_queue:
             if count % 2 == 0:
                 queue = begin_queue
                 cur_set, target_set = begin_set, end_set
@@ -56,6 +54,6 @@ class Solution:
 
 
 s = Solution()
-# print(s.ladderLength("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]))
-# print(s.ladderLength("hit", "cog", ["hot", "dot", "dog", "lot"]))
+print(s.ladderLength("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]))
+print(s.ladderLength("hit", "cog", ["hot", "dot", "dog", "lot"]))
 print(s.ladderLength("hot", "dog", ["hot", "dog"]))
