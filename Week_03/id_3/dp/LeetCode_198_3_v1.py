@@ -9,17 +9,21 @@
 
 class Solution:
     def rob(self, nums):
-        return self.dfs(False, 0, nums, [None] * len(nums))
+        if not nums:
+            return 0
+        return self.dfs(False, 0, nums, [None]*len(nums))
 
     def dfs(self, prev_steal, index, nums, cache):
-        if not nums or index >= len(nums):
+        if index >= len(nums):
             return 0
 
         if not cache[index]:
             r1 = self.dfs(False, index+1, nums, cache)
             r2 = nums[index] + self.dfs(True, index+1, nums, cache)
             cache[index] = (r1, max(r1, r2))
-        return cache[index][0] if prev_steal else cache[index][1]
+
+        results = cache[index]
+        return results[0] if prev_steal else results[1]
 
 
 s = Solution()
