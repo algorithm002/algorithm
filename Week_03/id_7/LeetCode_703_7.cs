@@ -7,11 +7,13 @@ using System;
 
 public class KthLargest {
     int[] heap;
+    // 堆中已经存储的数据个数
     int count;
+    // 堆容量
     int capacity;
 
     public KthLargest (int k, int[] nums) {
-        heap = new int[nums.Length];
+        heap = new int[k];
         capacity = k;
         count = 0;
         for (int i = 0; i < nums.Length; i++) {
@@ -21,16 +23,18 @@ public class KthLargest {
 
     public int Add (int val) {
         if (count < capacity) {
-            heap[count++] = val;
-            int i = count - 1;
+            heap[count] = val;
+            int i = count;
             while (i > 0) {
-                if (heap[i] < heap[(i - 1) / 2]) {
+                int nPIndex = (i - 1) / 2;
+                if (heap[i] < heap[nPIndex]) {
                     int temp = heap[i];
-                    heap[i] = heap[(i - 1) / 2];
-                    heap[(i - 1) / 2] = temp;
+                    heap[i] = heap[nPIndex];
+                    heap[nPIndex] = temp;
                 }
-                i = (i - 1) / 2;
+                i = nPIndex;
             }
+            count++;
         } else if (val > heap[0]) {
             heap[0] = val;
             int i = 0;
@@ -39,9 +43,10 @@ public class KthLargest {
                 if (i + 1 < count && heap[i] > heap[i + 1]) {
                     i++;
                 }
-                if (heap[(i - 1) / 2] > heap[i]) {
-                    int temp = heap[(i - 1) / 2];
-                    heap[(i - 1) / 2] = heap[i];
+                int nPIndex = (i - 1) / 2;
+                if (heap[nPIndex] > heap[i]) {
+                    int temp = heap[nPIndex];
+                    heap[nPIndex] = heap[i];
                     heap[i] = temp;
                 }
             }
