@@ -34,25 +34,25 @@ class Solution:
         return self.dp2(prices)
 
     def dp1(self, prices):
-        cache = [0, 0, 0]
+        cache = (0, 0, 0)
         for idx in range(len(prices) - 1, 0, -1):
             d = prices[idx] - prices[idx - 1]
-            cache = [
+            cache = (
                 max(cache[0], cache[1]),
                 max(cache[1], cache[2]) + d,
                 cache[0],
-            ]
+            )
         return max(cache[0], cache[1])
 
     def dp2(self, prices):
-        cache = [0, 0, 0]
+        cache = (0, 0, 0)
         for idx in range(1, len(prices)):
             d = prices[idx] - prices[idx - 1]
-            cache = [
+            cache = (
                 max(cache[0], cache[2]),
                 max(cache[0], cache[1] + d),
                 cache[1] + d
-            ]
+            )
         return max(cache)
 
 
