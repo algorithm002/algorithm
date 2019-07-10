@@ -21,6 +21,7 @@
 如果是买入状态 则最大值是 之前空仓或者买入状态+差值的最大值
 如果是卖出操作 则最大值是 之前是买入状态的最大值
 ======================
+优化缓存数组，减少内存使用。目前这种n只依赖n-1的dp，没必要记录全量。
 ======================
 还得多练练
 """
@@ -33,29 +34,26 @@ class Solution:
         return self.dp2(prices)
 
     def dp1(self, prices):
-        cache = [None for _ in range(len(prices) + 1)]
-        cache[-1] = [0, 0, 0]
+        cache = [0, 0, 0]
         for idx in range(len(prices) - 1, 0, -1):
-            next_cache = cache[idx + 1]
             d = prices[idx] - prices[idx - 1]
-            cache[idx] = [
-                max(next_cache[0], next_cache[1]),
-                max(next_cache[1], next_cache[2]) + d,
-                next_cache[0],
+            cache = [
+                max(cache[0], cache[1]),
+                max(cache[1], cache[2]) + d,
+                cache[0],
             ]
-        return max(cache[1][0], cache[1][1])
+        return max(cache[0], cache[1])
 
     def dp2(self, prices):
-        cache = [[0, 0, 0]]
+        cache = [0, 0, 0]
         for idx in range(1, len(prices)):
-            prev_cache = cache[idx - 1]
             d = prices[idx] - prices[idx - 1]
-            cache.append([
-                max(prev_cache[0], prev_cache[2]),
-                max(prev_cache[0], prev_cache[1] + d),
-                prev_cache[1] + d
-            ])
-        return max(cache[-1])
+            cache = [
+                max(cache[0], cache[2]),
+                max(cache[0], cache[1] + d),
+                cache[1] + d
+            ]
+        return max(cache)
 
 
 s = Solution()
