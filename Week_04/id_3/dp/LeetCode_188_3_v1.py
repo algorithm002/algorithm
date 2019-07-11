@@ -39,7 +39,7 @@ class Solution:
     def maxProfit(self, k: int, prices) -> int:
         if not k or not prices:
             return 0
-        if k > len(prices)//2:
+        if k >= len(prices)//2:
             return self.simplify(0, 0, prices, [[None, None] for _ in range(len(prices))])
         return self.recursion(k, 0, 0, 0, prices, [[{}, {}] for _ in range(len(prices))])
 
@@ -95,5 +95,6 @@ class Solution:
 s = Solution()
 print(s.maxProfit(2, [2, 1, 2, 0, 1]))
 print(s.maxProfit(2, [2, 4, 1]))
+print(s.maxProfit(2, [1, 4, 2, 7]))
 print(s.maxProfit(2, [3, 2, 6, 5, 0, 3]))
 print(s.maxProfit(2, [3, 3, 5, 0, 0, 3, 1, 4]))

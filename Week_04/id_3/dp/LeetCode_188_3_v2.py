@@ -19,6 +19,9 @@
 
 =============================
 试试DP方式
+日期/操作状态/k 三个状态 O(n*k)
+=============================
+勉强通过 只打败 50% 而且没办法优雅的解决k巨大的时候 只能两种解法
 """
 
 
@@ -27,9 +30,43 @@ class Solution:
         if not k or not prices:
             return 0
 
+        if k >= len(prices)//2:
+            r = 0
+            for idx in range(1, len(prices)):
+                d = prices[idx] - prices[idx - 1]
+                r = max(r, r + d)
+            return r
+
+        cache = [[0, 0], [0, 0], [0, 0]]
+        for idx in range(1, len(prices)):
+            max_k = min(idx//2 + 1, k) + 1
+            new_cache = [[0] * (k+1), [0] * (k+1), [0] * (k+1)]
+            d = prices[idx] - prices[idx-1]
+            for i in range(1, max_k):
+                # 无操作
+                new_cache[0][i] = (max(
+                    cache[0][i],
+                    cache[2][i],
+                ))
+
+                # 买入
+                new_cache[1][i] = (max(
+                    cache[0][i - 1],
+                    cache[1][i] + d,
+                    cache[2][i - 1],
+                    ))
+
+                # 卖出
+                new_cache[2][i] = max(cache[1][i] + d, 0)
+
+            cache = new_cache
+
+        return max(cache[0] + cache[1] + cache[2])
+
 
 s = Solution()
 print(s.maxProfit(2, [2, 1, 2, 0, 1]))
 print(s.maxProfit(2, [2, 4, 1]))
+print(s.maxProfit(2, [1, 4, 2, 7]))
 print(s.maxProfit(2, [3, 2, 6, 5, 0, 3]))
 print(s.maxProfit(2, [3, 3, 5, 0, 0, 3, 1, 4]))
