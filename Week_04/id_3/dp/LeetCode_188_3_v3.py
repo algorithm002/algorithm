@@ -22,9 +22,11 @@
 =============================
 这么做是不行的，如果是不限次数，那么没有问题，如果限制次数，这种方式就无法使用了。
 1,2,4,2,9 如果只能交易一次，那么1-9是最优解。如果可以交易2次，那么1-4,2-9是最优解。
+只能用于k>len(prices)//2的情况 而且用小顶堆优化也还没有dp的解法快
 =============================
 失败！！
 """
+import heapq
 
 
 class Solution:
@@ -35,7 +37,7 @@ class Solution:
         last = prices[0]
         status = 0
         last_min = None
-        cache = []
+        heap = []
         for price in prices:
             if last == price:
                 continue
@@ -46,15 +48,20 @@ class Solution:
             else:
                 if status != -1:
                     if last_min is not None:
-                        cache.append(last - last_min)
+                        self.push(heap, k, last - last_min)
                     status = -1
 
             last = price
         if status == 1:
-            cache.append(last - last_min)
+            self.push(heap, k, last - last_min)
 
-        print(cache)
-        return sum(sorted(cache[-k:]))
+        return sum(sorted(heap[-k:]))
+
+    def push(self, heap, k, value):
+        if len(heap) >= k:
+            heapq.heapreplace(heap, value)
+        else:
+            heapq.heappush(heap, value)
 
 
 s = Solution()
@@ -63,4 +70,4 @@ s = Solution()
 # print(s.maxProfit(2, [1, 4, 2, 7]))
 # print(s.maxProfit(2, [3, 2, 6, 5, 0, 3]))
 # print(s.maxProfit(2, [3, 3, 5, 0, 0, 3, 1, 4]))
-print(s.maxProfit(2, [1, 2, 4, 2, 5, 7, 2, 4, 9, 0]))
+# print(s.maxProfit(2, [1, 2, 4, 2, 5, 7, 2, 4, 9, 0]))

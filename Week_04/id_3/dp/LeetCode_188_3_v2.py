@@ -54,7 +54,7 @@ class Solution:
                     cache[0][i - 1],
                     cache[1][i] + d,
                     cache[2][i - 1],
-                    ))
+                ))
 
                 # 卖出
                 new_cache[2][i] = max(cache[1][i] + d, 0)
