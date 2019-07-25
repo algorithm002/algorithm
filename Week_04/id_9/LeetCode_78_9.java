@@ -21,11 +21,12 @@ public class Solution78 {
 
     private void traverse(int[] nums, int index, List<List<Integer>> list, List<Integer> currentList) {
 
-        //terminal
+        // terminator
         if (nums.length == index) {
             list.add(currentList);
             return;
         }
+
         // process & drill down
         List<Integer> target = new LinkedList<>(currentList);
 

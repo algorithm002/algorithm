@@ -3,6 +3,9 @@ def lowest_common_ancestor(root, p, q):
         return root
     left = lowest_common_ancestor(root.left, p, q)
     right = lowest_common_ancestor(root.right, p, q)
+
+
+    # 三目表达识
     if left and right:
         return root
     return left or right

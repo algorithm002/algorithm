@@ -7,9 +7,9 @@
 
 示例 1:
 ```
-给定数组 nums = [1,1,2], 
+给定数组 nums = [1,1,2],
 
-函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
+函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。
 
 你不需要考虑数组中超出新长度后面的元素。
 ```
@@ -52,7 +52,7 @@ class Solution {
                 nums[nonDuplicatesIndex++] = nums[i];
             }
         }
-        
+
         return nonDuplicatesIndex;
     }
 }
@@ -70,7 +70,7 @@ class Solution {
                 nums[nonDuplicatesIndex++] = nums[i];
             }
         }
-        
+
         return nonDuplicatesIndex;
     }
 }
@@ -88,7 +88,7 @@ class Solution {
             }
             nums[nonDuplicatesIndex++] = nums[i];
         }
-        
+
         return nonDuplicatesIndex;
     }
 }
@@ -130,13 +130,13 @@ class Solution {
                 }
             }
         }
-        
+
         for (char c: tc) {
             if (c != '#') {
                 return false;
             }
         }
-        
+
         return s.length() == t.length();
     }
 }
@@ -158,14 +158,14 @@ class Solution {
             }
             return false;
         }
-        
+
         for (Long value: map.values()) {
             if (value != 0) {
                 return false;
             }
         }
-        
-        return true;    
+
+        return true;
     }
 }
 ```
@@ -230,18 +230,18 @@ class Solution {
         char[] cs = s.toCharArray();
         char[] ct = t.toCharArray();
         int[] countArr = new int[26];
-        
+
         for (int i = 0; i < cs.length; i++) {
             countArr[cs[i] - 'a']++;
             countArr[ct[i] - 'a']--;
         }
-        
+
         for (int i: countArr) {
             if (i != 0) {
                 return false;
             }
         }
-        
+
         return ture;
     }
 }
@@ -306,7 +306,7 @@ class Solution {
         if (S == null || "".equals(S)) {
             return S;
         }
-        
+
         Stack<Character> stack = new Stack<>();
         for (char c: S.toCharArray()) {
             if (stack.isEmpty() || stack.peek() != c) {
@@ -343,7 +343,7 @@ class Solution {
         if (S == null || "".equals(S)) {
             return S;
         }
-        
+
         char[] cs = S.toCharArray();
         int nonDuplicatesIndex = -1;
         for (int i = 0; i < cs.length; i++) {
@@ -353,7 +353,7 @@ class Solution {
                 nonDuplicatesIndex--;
             }
         }
-        
+
         return new String(cs, 0, nonDuplicatesIndex + 1);
     }
 }
@@ -403,7 +403,7 @@ class Solution {
     public int arrangeCoins(int n) {
         return doJob(0, 0, n);
     }
-    
+
     private int doJob(int level, int sum, int n) {
         return sum + ++level > n ? --level : doJob(level, sum+level, n);
     }
@@ -505,13 +505,13 @@ class Solution {
     public int maxDepth(TreeNode root) {
         return doSearch(0, root);
     }
-    
+
     private int doSearch(int level, TreeNode root) {
         //terminator
         if (root == null) {
             return level;
         }
-        //prepare 
+        //prepare
         level++;
         //subproblems  & prepare & generate result
         return Math.max(doSearch(level, root.left), doSearch(level, root.right));
@@ -549,7 +549,7 @@ public class LeetCode_104_18 {
 ```
 输入: [-1,-100,3,99] 和 k = 2
 输出: [3,99,-1,-100]
-解释: 
+解释:
 向右旋转 1 步: [99,-1,-100,3]
 向右旋转 2 步: [3,99,-1,-100]
 ```
@@ -564,12 +564,12 @@ class Solution {
         if (nums == null || nums.length == 0) {
             return;
         }
-        
+
         for (int i = 0; i < k; i++) {
             doMove(nums);
         }
     }
-    
+
     private void doMove(int[] nums) {
         int store = nums[0];
         for (int i = 0; i < nums.length - 1; i++) {
@@ -601,7 +601,7 @@ class Solution {
         if (k == 0 || nums == null || nums.length <= 1 || (k % nums.length == 0)) {
             return;
         }
-        
+
         int index = 0;
         int start = 0;
         int store = nums[index];
@@ -630,14 +630,14 @@ class Solution {
         if (k == 0 || nums == null || nums.length < 2 || k % nums.length == 0) {
             return;
         }
-        
+
         k %= nums.length;
-        
+
         swap(nums, 0, nums.length - 1);
         swap(nums, 0, k - 1);
         swap(nums, k, nums.length - 1);
     }
-    
+
     private void swap(int[] nums, int head, int tail) {
         while (head < tail) {
             exchange(nums, head, tail);
@@ -645,7 +645,7 @@ class Solution {
             tail--;
         }
     }
-    
+
     private void exchange(int[] nums, int x, int y) {
         nums[x] ^= nums[y];
         nums[y] ^= nums[x];
@@ -683,33 +683,33 @@ class Solution {
         if (nums == null || nums.length < 3) {
             return Collections.emptyList();
         }
-        
+
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();
-        
+
         int pointer = 0, head, tail, target;
         while (pointer < nums.length - 2) {
             if (pointer > 0 && nums[pointer] == nums[pointer - 1]) {
                 pointer++;
                 continue;
             }
-            
+
             head = pointer + 1;
             tail = nums.length - 1;
             target = -nums[pointer];
-            
+
             while (head < tail) {
                 if (nums[head] + nums[tail] == target) {
                     result.add(Arrays.asList(nums[pointer], nums[head], nums[tail]));
-                    
+
                     while (head < tail && nums[head] == nums[head + 1]) {
                         head++;
                     }
-                    
+
                     while (head < tail && nums[tail - 1] == nums[tail]) {
                         tail--;
                     }
-                    
+
                     head++;
                     tail--;
                 } else if (nums[head] + nums[tail] < target) {
@@ -718,10 +718,10 @@ class Solution {
                     tail--;
                 }
             }
-            
+
             pointer++;
         }
-        
+
         return result;
     }
 }
@@ -791,8 +791,8 @@ class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null || strs.length == 0) {
             return Collections.emptyList();
-        }    
-        
+        }
+
         Map<String, List<String>> map = new HashMap<>();
         for (String s: strs) {
             char[] cs = s.toCharArray();
@@ -803,7 +803,7 @@ class Solution {
             }
             map.get(tmp).add(s);
         }
-        return new ArrayList<>(map.values()); 
+        return new ArrayList<>(map.values());
     }
 }
 ```
@@ -971,20 +971,20 @@ class Solution {
     public boolean isSymmetric(TreeNode root) {
         return doCheck(root, root);
     }
-    
+
     private boolean doCheck(TreeNode left, TreeNode right) {
         if (left == null && right == null) {
             return true;
         }
-        
+
         if (left == null  || right == null) {
             return false;
         }
-        
+
         return (left.val == right.val) && doCheck(left.left, right.right) && doCheck(left.right, right.left);
     }
 }
-``` 
+```
 ### 解法二
 #### 思路
 思路和解法一的递归类似，使用近似BFS的方式来解
@@ -995,23 +995,23 @@ class Solution {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         queue.add(root);
-        
+
         while (!queue.isEmpty()) {
             TreeNode left = queue.poll();
             TreeNode right = queue.poll();
-            
+
             if (left == null && right == null) {
                 continue;
             }
-            
+
             if (left == null || right == null) {
                 return false;
             }
-            
+
             if (left.val != right.val) {
                 return false;
             }
-            
+
             queue.add(left.left);
             queue.add(right.right);
             queue.add(left.right);
@@ -1031,23 +1031,23 @@ class Solution {
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         stack.push(root);
-        
+
         while (!stack.isEmpty()) {
             TreeNode left = stack.pop();
             TreeNode right = stack.pop();
-            
+
             if (left == null && right == null) {
                 continue;
             }
-            
+
             if (left == null || right == null) {
                 return false;
             }
-            
+
             if (left.val != right.val) {
                 return false;
             }
-            
+
             stack.push(left.left);
             stack.push(right.right);
             stack.push(left.right);
@@ -1076,3 +1076,8 @@ class Solution {
 #### 代码
 
 ### 收获
+
+
+
+
+Chao：非常好的总结。继续保持这样的方式进行训练和刷题下去。注意多看中文题解和国际站上的代码，进行代码优化！

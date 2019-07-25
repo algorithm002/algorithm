@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * Given a binary search tree, find the lowest common ancestor (LCA) of two
  * given nodes in the bst.
- * 
+ *
  * @author liliangzi
  *
- * 
+ *
  *         Definition for a binary tree node. public class TreeNode { int val;
  *         TreeNode left; TreeNode right; TreeNode(int x) { val = x; } }
  */
@@ -45,6 +45,9 @@ public class LeetCode_235_2 {
 	}
 
 	public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+
+		// Chao: 如果有相应的return在if语句里的时候，建议能直接不需要else的分支。
+
 		if (root.val == p.val || root.val == q.val)
 			return root;
 		if ((p.val <= root.val && q.val >= root.val) || (p.val >= root.val && q.val <= root.val)) {

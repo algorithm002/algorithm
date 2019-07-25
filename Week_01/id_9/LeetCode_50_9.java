@@ -35,6 +35,7 @@ public class Solution50 {
 
         double temp = halfPow(x, n / 2);
 
+        // 优化三目，直接return
         if (flag) {
             result = temp * temp;
         } else {

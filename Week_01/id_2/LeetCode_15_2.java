@@ -9,15 +9,15 @@ import java.util.Random;
  * Given an array nums of n integers, are there elements a, b, c in nums such
  * that a + b + c = 0? Find all unique triplets in the array which gives the sum
  * of zero.
- * 
+ *
  * Note:
- * 
+ *
  * The solution set must not contain duplicate triplets.
- * 
+ *
  * Given array nums = [-1, 0, 1, 2, -1, -4],
- * 
+ *
  * A solution set is: [ [-1, 0, 1], [-1, -1, 2] ]
- * 
+ *
  * @author liliangzi
  *
  */
@@ -25,10 +25,13 @@ public class LeetCode_15_2 {
 
 	/**
 	 * Output limit exceeded brutal force
-	 * 
+	 *
 	 * @param nums
 	 * @return
 	 */
+
+	 // 很好！！！
+
 	public List<List<Integer>> threeSumExceedOutputLimit(int[] nums) {
 		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		for (int i = 0; i < nums.length; i++) {
@@ -44,7 +47,7 @@ public class LeetCode_15_2 {
 
 	/**
 	 * have referenced discussion
-	 * 
+	 *
 	 * @param nums
 	 * @return
 	 */

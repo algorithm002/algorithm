@@ -19,19 +19,16 @@ var mergeTwoLists = function(l1, l2) {
     let head = new ListNode(0);
     let l = head;
     while(l1)
-    { 
+    {
         if(!l2)
         {
             l.next= l1;
             break;
         }
-        if(l1.val <= l2.val)
-        {  
+        if (l1.val <= l2.val) {
             l.next = l1;
             l1=l1.next;
-        }
-        else
-        {  
+        } else {
             l.next=l2;
             l2=l2.next;
         }
@@ -39,7 +36,7 @@ var mergeTwoLists = function(l1, l2) {
     }
     if(l2)
     {
-       
+
         l.next = l2;
     }
     return head.next;
