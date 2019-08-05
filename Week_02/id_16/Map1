@@ -1,0 +1,15 @@
+   //242 有效的字母异位
+   字符串数组是否元素相同
+
+    public  boolean sea(String s,String t)
+    {
+        char []schars=s.toCharArray();
+        char []tchars=t.toCharArray();
+        Arrays.sort(schars);
+        Arrays.sort(tchars);
+        if(schars==tchars)
+            return true;
+        else
+            return false;
+
+    }
