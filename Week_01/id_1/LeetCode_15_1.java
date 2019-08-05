@@ -91,7 +91,6 @@ public class ThreeSum {
         for (int i = 0; i < nums.length - 2; i++) {
             if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
 
-
                 int left = i + 1, right = nums.length - 1, needValue = 0 - nums[i];
                 while (left < right) {
                     if (needValue == (nums[left] + nums[right])) {
@@ -114,3 +113,6 @@ public class ThreeSum {
     }
 
 }
+
+
+// 左右指针的向中间逼近问题

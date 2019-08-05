@@ -5,7 +5,7 @@ class Solution(object):
         :type s: List[int]
         :rtype: int
         """
-        childs = 0
+        childs = 0  # 注意：复数是 children
         cookies = 0
         g.sort()
         s.sort()

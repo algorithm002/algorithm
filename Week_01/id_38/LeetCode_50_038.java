@@ -8,6 +8,9 @@ class LeetCode_50_038 {
         if (n == 0) return 1.0;
 
         double half = myPow(x, n / 2);
+
+
+        // 建议这里直接return三目运算符
         if (n % 2 == 0) {
             return half * half;
         } else {

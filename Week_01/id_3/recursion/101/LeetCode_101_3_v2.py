@@ -13,10 +13,11 @@ def is_symmetric(root):
     return is_mirror(root.left, root.right)
 
 
+
 def is_mirror(t1, t2):
     if not t1 and not t2:
         return True
-    if bool(t1) != bool(t2):
+    if bool(t1) != bool(t2):  # bool ? the reason ?
         return False
     if t1.val != t2.val:
         return False

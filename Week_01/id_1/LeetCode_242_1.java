@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class ValidAnagram {
     public static void main(String[] args) {
-         ValidAnagram anagram = new ValidAnagram();
+         ValidAnagram anagram = new ValidAnagram(); // 注意这里的空格和格式
          String s = "anagram", t = "nagaram";
         System.out.println(anagram.isAnagram4(s,t));
     }

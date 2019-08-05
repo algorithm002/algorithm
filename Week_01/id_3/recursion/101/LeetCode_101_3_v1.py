@@ -14,6 +14,7 @@ def is_symmetric(root):
 
     return True
 
+# 可能逻辑上有bug
 
 def is_mirror(queue):
     length = len(queue)
@@ -22,6 +23,9 @@ def is_mirror(queue):
     if length % 2 == 1:
         return False
 
+    for (i ,j  )
+
+    # 优化代码
     for i in range(int(length/2)):
         n1 = queue[i]
         n2 = queue[length - i - 1]

@@ -52,3 +52,7 @@ def three_sum(nums):
                     r.append(arr)
 
     return r
+
+
+# 需要进一步优化代码!
+# 优化很好

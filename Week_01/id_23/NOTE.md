@@ -8,3 +8,6 @@
 #### 关于递归 Recursion
 “如果使用循环，程序地性能可能更高；如果适用递归，程序可能更容易理解。如何选择要看什么对你来说更重要” --Leigh Caldwell
 递归套路模板 1. Recursion terminator2. Process logic 3.Drill down 4.Reverse the current level status if needed
+
+
+Chao：很不错的总结！希望保持这样的训练方法和势头，继续加油！
